@@ -1,20 +1,13 @@
 package com.dwi.saas.tenant;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dwi.basic.base.R;
-//import org.springframework.cloud.openfeign.FeignClient;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.RequestParam;
-//
-//import com.dwi.basic.base.R;
 import com.dwi.saas.tenant.domain.entity.Tenant;
 
 import io.swagger.annotations.ApiOperation;
 
-//import io.swagger.annotations.ApiOperation;
 
 /**
  * 租户接口
@@ -22,8 +15,6 @@ import io.swagger.annotations.ApiOperation;
  * @author dwi
  * @date 2019/06/21
  */
-//@FeignClient(name = "${saas.feign.tenant-server:saas-tenant-server}", path = "/tenant", fallback = TenantApiFallback.class)
-@RequestMapping("/tenant")
 public interface TenantApi {
 
     /**

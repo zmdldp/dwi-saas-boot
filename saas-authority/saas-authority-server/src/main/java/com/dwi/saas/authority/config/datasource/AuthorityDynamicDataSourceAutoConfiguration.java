@@ -6,8 +6,8 @@ import com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSour
 import com.baomidou.dynamic.datasource.spring.boot.autoconfigure.druid.DruidDynamicDataSourceConfiguration;
 import com.dwi.basic.database.datasource.BaseDynamicDataSourceAutoConfiguration;
 import com.dwi.basic.database.properties.DatabaseProperties;
-import com.dwi.saas.tenant.biz.strategy.impl.DatasourceInitSystemStrategy;
-import com.dwi.saas.tenant.context.InitDatabaseOnStarted;
+import com.dwi.saas.tenant.init.biz.service.DatasourceInitDataSourceService;
+import com.dwi.saas.tenant.init.context.InitDatabaseOnStarted;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
@@ -68,7 +68,7 @@ public class AuthorityDynamicDataSourceAutoConfiguration extends BaseDynamicData
      * @return
      */
     @Bean
-    public InitDatabaseOnStarted getInitDatabaseOnStarted(DatasourceInitSystemStrategy initSystemContext) {
+    public InitDatabaseOnStarted getInitDatabaseOnStarted(DatasourceInitDataSourceService initSystemContext) {
         return new InitDatabaseOnStarted(initSystemContext);
     }
 }

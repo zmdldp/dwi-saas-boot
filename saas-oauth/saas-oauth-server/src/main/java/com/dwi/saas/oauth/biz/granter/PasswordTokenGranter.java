@@ -19,9 +19,8 @@ import com.dwi.basic.base.R;
 import com.dwi.basic.database.properties.DatabaseProperties;
 import com.dwi.basic.jwt.TokenUtil;
 import com.dwi.basic.jwt.model.AuthInfo;
-import com.dwi.saas.authority.api.ApplicationBizApi;
-//import com.dwi.saas.authority.api.OnlineBizApi;
-import com.dwi.saas.authority.api.UserBizApi;
+import com.dwi.saas.authority.ApplicationApi;
+import com.dwi.saas.authority.UserApi;
 import com.dwi.saas.oauth.biz.service.OnlineService;
 //import com.dwi.saas.authority.api.domain.LoginParamDTO;
 import com.dwi.saas.oauth.biz.service.ValidateCodeService;
@@ -44,10 +43,10 @@ public class PasswordTokenGranter extends AbstractTokenGranter implements TokenG
 
     public static final String GRANT_TYPE = "password";
 
-    public PasswordTokenGranter(TokenUtil tokenUtil, UserBizApi userBizApi,
-			   TenantApi tenantApi, ApplicationBizApi applicationBizApi,
+    public PasswordTokenGranter(TokenUtil tokenUtil, UserApi userApi,
+			   TenantApi tenantApi, ApplicationApi applicationApi,
                DatabaseProperties databaseProperties, OnlineService onlineService) {
-    	super(tokenUtil, userBizApi, tenantApi, applicationBizApi, databaseProperties, onlineService);
+    	super(tokenUtil, userApi, tenantApi, applicationApi, databaseProperties, onlineService);
     }
 
     @Override

@@ -14,6 +14,7 @@ import com.dwi.basic.base.controller.SuperSimpleController;
 import com.dwi.basic.base.request.PageParams;
 import com.dwi.basic.context.ContextUtil;
 import com.dwi.basic.utils.BizAssert;
+import com.dwi.saas.file.AttachmentApi;
 import com.dwi.saas.file.biz.service.AttachmentService;
 import com.dwi.saas.file.domain.dto.AttachmentDTO;
 import com.dwi.saas.file.domain.dto.AttachmentRemoveDTO;
@@ -48,7 +49,6 @@ import java.util.List;
 import java.util.Map;
 
 import static com.dwi.basic.exception.code.ExceptionCode.BASE_VALID_PARAM;
-import static com.dwi.saas.common.constant.SwaggerConstants.DATA_TYPE_ARRAY;
 import static com.dwi.saas.common.constant.SwaggerConstants.DATA_TYPE_BOOLEAN;
 import static com.dwi.saas.common.constant.SwaggerConstants.DATA_TYPE_LONG;
 import static com.dwi.saas.common.constant.SwaggerConstants.DATA_TYPE_MULTIPART_FILE;
@@ -72,7 +72,8 @@ import static java.util.stream.Collectors.groupingBy;
 @SysLog(enabled = false)
 @PreAuth(replace = "file:attachment:")
 public class AttachmentController extends SuperSimpleController<AttachmentService, Attachment>
-        implements QueryController<Attachment, Long, FilePageReqDTO>, DeleteController<Attachment, Long> {
+        implements QueryController<Attachment, Long, FilePageReqDTO>, DeleteController<Attachment, Long>,
+        AttachmentApi{
 
     /**
      * 业务类型判断符
@@ -103,6 +104,7 @@ public class AttachmentController extends SuperSimpleController<AttachmentServic
     @PostMapping(value = "/upload")
     @SysLog("上传附件")
     @PreAuth("hasAnyPermission('{}add')")
+    @Override
     public R<AttachmentDTO> upload(
             @RequestParam(value = "file") MultipartFile file,
             @RequestParam(value = "isSingle", required = false, defaultValue = "false") Boolean isSingle,
@@ -136,6 +138,10 @@ public class AttachmentController extends SuperSimpleController<AttachmentServic
     )
     @GetMapping
     @SysLog("根据业务类型查询附件")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "bizIds", value = "业务id", dataType = DATA_TYPE_STRING, allowMultiple = true, paramType = PARAM_TYPE_QUERY),
+        @ApiImplicitParam(name = "bizTypes", value = "业务类型", dataType = DATA_TYPE_STRING, allowMultiple = true, paramType = PARAM_TYPE_QUERY),
+    })
     @PreAuth("hasAnyPermission('{}view')")
     public R<List<AttachmentResultDTO>> findAttachment(@RequestParam(value = "bizTypes", required = false) String[] bizTypes,
                                                        @RequestParam(value = "bizIds", required = false) String[] bizIds) {
@@ -191,9 +197,9 @@ public class AttachmentController extends SuperSimpleController<AttachmentServic
      * @date 2019-05-12 21:23
      */
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "bizIds[]", value = "业务id数组", dataType = DATA_TYPE_ARRAY, paramType = PARAM_TYPE_QUERY),
-            @ApiImplicitParam(name = "bizTypes[]", value = "业务类型数组", dataType = DATA_TYPE_ARRAY, paramType = PARAM_TYPE_QUERY),
-    })
+        @ApiImplicitParam(name = "bizIds[]", value = "业务id数组", dataType = DATA_TYPE_STRING, allowMultiple = true, paramType = PARAM_TYPE_QUERY),
+        @ApiImplicitParam(name = "bizTypes[]", value = "业务类型数组", dataType = DATA_TYPE_STRING, allowMultiple = true, paramType = PARAM_TYPE_QUERY),
+})
     @ApiOperation(value = "根据业务类型/业务id打包下载", notes = "根据业务id下载一个文件或多个文件打包下载")
     @GetMapping(value = "/download/biz", produces = "application/octet-stream")
     @SysLog("根据业务类型下载附件")

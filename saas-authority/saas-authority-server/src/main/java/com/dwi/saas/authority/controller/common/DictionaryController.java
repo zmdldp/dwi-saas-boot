@@ -8,6 +8,7 @@ import com.dwi.basic.base.controller.SuperController;
 import com.dwi.basic.base.request.PageParams;
 import com.dwi.basic.database.mybatis.conditions.Wraps;
 import com.dwi.basic.database.mybatis.conditions.query.QueryWrap;
+import com.dwi.saas.authority.DictionaryApi;
 import com.dwi.saas.authority.biz.service.common.DictionaryService;
 import com.dwi.saas.authority.domain.dto.common.DictionaryPageQuery;
 import com.dwi.saas.authority.domain.dto.common.DictionarySaveDTO;
@@ -28,7 +29,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * <p>
@@ -76,7 +80,7 @@ public class DictionaryController
 
     @ApiOperation(value = "保存-字典类型")
     @PostMapping(value = "/type")
-    @PreAuth("hasAnyPermission('{}save')")
+    @PreAuth("hasAnyPermission('{}add')")
     public R<Dictionary> saveType(@RequestBody @Validated DictionaryTypeSaveDTO dictType) {
         return R.success(baseService.saveType(dictType));
     }
@@ -94,4 +98,5 @@ public class DictionaryController
     public R<Boolean> deleteType(@RequestParam("types[]") List<String> types) {
         return R.success(baseService.deleteType(types));
     }
+
 }

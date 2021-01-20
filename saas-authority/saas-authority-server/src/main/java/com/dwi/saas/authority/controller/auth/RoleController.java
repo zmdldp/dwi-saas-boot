@@ -7,6 +7,7 @@ import com.dwi.basic.base.controller.SuperCacheController;
 import com.dwi.basic.database.mybatis.auth.DataScopeType;
 import com.dwi.basic.database.mybatis.conditions.Wraps;
 import com.dwi.basic.utils.BeanPlusUtil;
+import com.dwi.saas.authority.RoleApi;
 import com.dwi.saas.authority.biz.service.auth.RoleAuthorityService;
 import com.dwi.saas.authority.biz.service.auth.RoleOrgService;
 import com.dwi.saas.authority.biz.service.auth.RoleService;
@@ -54,7 +55,8 @@ import java.util.stream.Collectors;
 @Api(value = "Role", tags = "角色")
 @PreAuth(replace = "authority:role:")
 @RequiredArgsConstructor
-public class RoleController extends SuperCacheController<RoleService, Long, Role, RolePageQuery, RoleSaveDTO, RoleUpdateDTO> {
+public class RoleController extends SuperCacheController<RoleService, Long, Role, RolePageQuery, RoleSaveDTO, RoleUpdateDTO> 
+	implements RoleApi{
 
     private final RoleAuthorityService roleAuthorityService;
     private final RoleOrgService roleOrgService;
@@ -177,8 +179,8 @@ public class RoleController extends SuperCacheController<RoleService, Long, Role
      * @return 查询结果
      */
     @ApiOperation(value = "根据角色编码查询用户ID", notes = "根据角色编码查询用户ID")
-    @GetMapping("/codes")
     @SysLog("根据角色编码查询用户ID")
+    @Override
     public R<List<Long>> findUserIdByCode(@RequestParam(value = "codes") String[] codes) {
         return success(baseService.findUserIdByCode(codes));
     }

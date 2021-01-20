@@ -6,7 +6,7 @@ saas:
     type: REDIS
   redis:
     ip: 127.0.0.1
-    port: 16379
+    port: 6379
     password: SbtyMveYNfLzTks7H0apCmyStPzWJqjy
     database: 0
   rabbitmq:
@@ -16,16 +16,16 @@ saas:
     username: dwi
     password: dwi
   mysql:
-    ip: 127.0.0.1
+    ip: 192.168.0.83
     port: 3306
     driverClassName: com.mysql.cj.jdbc.Driver
-    database: saas_boot_column
+    database: saas_defaults
     username: root
     password: root
     url: jdbc:mysql://${saas.mysql.ip}:${saas.mysql.port}/${saas.mysql.database}?serverTimezone=CTT&characterEncoding=utf8&useUnicode=true&useSSL=false&autoReconnect=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&nullCatalogMeansCurrent=true
   database:
     tenantDatabasePrefix: saas_base  # 这里的前缀要和saas-authority-server/src/main/resources/sqls/下的文件名一致
-    multiTenantType: COLUMN
+    multiTenantType: DATASOURCE # COLUMN
     isNotWrite: false
     isBlockAttack: false  # 是否启用 攻击 SQL 阻断解析器
     isSeata: false
@@ -147,7 +147,7 @@ setting:
 
 
 server:
-  shutdown: GRACEFUL
+  #shutdown: GRACEFUL
   servlet:
     encoding:
       enabled: true
@@ -300,10 +300,10 @@ spring:
 
 mybatis-plus:
   mapper-locations:
-    - classpath*:mapper_**/**/*Mapper.xml
+    - classpath*:mapper**/**/*Mapper.xml
   #实体扫描，多个package用逗号或者分号分隔
-  typeAliasesPackage: com.dwi.saas.*.entity;com.dwi.basic.database.mybatis.typehandler
-  typeEnumsPackage: com.dwi.saas.*.enumeration
+  typeAliasesPackage: com.dwi.saas.**.entity;com.dwi.basic.database.mybatis.typehandler
+  typeEnumsPackage: com.dwi.saas.**.enumeration
   global-config:
     db-config:
       id-type: INPUT

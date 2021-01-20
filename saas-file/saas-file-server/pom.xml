@@ -14,11 +14,11 @@
     <description>文件服务业务模块</description>
     
     <dependencies>
-        <!-- <dependency>
+       <dependency>
             <groupId>com.dwi.saas</groupId>
-            <artifactId>saas-file-entity</artifactId>
+            <artifactId>saas-file-api</artifactId>
             <version>${saas-project.version}</version>
-        </dependency> -->
+        </dependency>  
         <dependency>
             <groupId>com.dwi.saas</groupId>
             <artifactId>saas-common</artifactId>
@@ -42,8 +42,7 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-context</artifactId>
         </dependency>
-
-
+        
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus</artifactId>

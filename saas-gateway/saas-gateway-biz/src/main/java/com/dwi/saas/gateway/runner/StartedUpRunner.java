@@ -5,8 +5,8 @@ import com.dwi.basic.database.properties.DatabaseProperties;
 import com.dwi.basic.database.properties.MultiTenantType;
 import com.dwi.saas.gateway.service.BlockListService;
 import com.dwi.saas.gateway.service.RateLimiterService;
-import com.dwi.saas.tenant.biz.dao.InitDatabaseMapper;
-import com.dwi.saas.tenant.domain.enumeration.TenantStatusEnum;
+import com.dwi.saas.tenant.init.biz.dao.InitDatabaseMapper;
+import com.dwi.saas.tenant.init.domain.enumeration.TenantStatusEnum;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +38,7 @@ public class StartedUpRunner implements ApplicationRunner {
             rateLimiterService.loadAllRateLimiters();
         } else {
             List<String> tenantCodeList = initDbMapper.selectTenantCodeList(TenantStatusEnum.NORMAL.name(), null);
-            tenantCodeList.forEach((tenantCode) -> {
+            tenantCodeList.forEach(tenantCode -> {
                 ContextUtil.setTenant(tenantCode);
                 blockListService.loadAllBlockList();
                 rateLimiterService.loadAllRateLimiters();

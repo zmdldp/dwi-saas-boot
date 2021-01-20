@@ -1,7 +1,7 @@
 package com.dwi.saas.activiti.domain.dto.biz;
 
 import com.dwi.saas.activiti.domain.entity.biz.BizItem;
-import com.dwi.saas.authority.api.domain.User;
+import com.dwi.saas.authority.domain.entity.auth.User;
 
 import lombok.Data;
 

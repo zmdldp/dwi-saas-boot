@@ -14,16 +14,6 @@
     <description>工作流业务模块</description>
 
     <dependencies>
-        <!-- <dependency>
-            <groupId>com.dwi.saas</groupId>
-            <artifactId>saas-activiti-entity</artifactId>
-            <version>${saas-project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.dwi.saas</groupId>
-            <artifactId>saas-authority-biz</artifactId>
-            <version>${saas-project.version}</version>
-        </dependency> -->
         
         <dependency>
             <groupId>com.dwi.saas</groupId>

@@ -28,8 +28,8 @@ import com.dwi.basic.base.R;
 import com.dwi.basic.base.request.PageParams;
 import com.dwi.basic.base.request.PageUtil;
 import com.dwi.basic.context.ContextUtil;
-import com.dwi.saas.authority.api.RoleApi;
-import com.dwi.saas.authority.api.UserBizApi;
+import com.dwi.saas.authority.RoleApi;
+import com.dwi.saas.authority.UserApi;
 import com.dwi.saas.msg.biz.service.MsgService;
 import com.dwi.saas.msg.domain.dto.MsgPageResult;
 import com.dwi.saas.msg.domain.dto.MsgQuery;
@@ -69,7 +69,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MsgController {
     private final MsgService msgService;
     private final RoleApi roleApi;
-    private final UserBizApi userBizApi;
+    private final UserApi userApi;
 
 
     /**
@@ -211,7 +211,7 @@ public class MsgController {
             }
         }
         if (MsgType.PUBLICITY.eq(data.getMsgDTO().getMsgType())) {
-            R<List<Long>> result = userBizApi.findAllUserId();
+            R<List<Long>> result = userApi.findAllUserId();
             if (result.getIsSuccess()) {
                 data.setUserIdList(new HashSet<>(result.getData()));
             }

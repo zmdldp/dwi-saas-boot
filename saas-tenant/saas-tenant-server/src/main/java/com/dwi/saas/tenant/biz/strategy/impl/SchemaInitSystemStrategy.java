@@ -1,32 +1,30 @@
 package com.dwi.saas.tenant.biz.strategy.impl;
 
-import static com.dwi.saas.common.constant.BizConstant.BASE_DATABASE;
-
-import java.io.StringReader;
-import java.nio.charset.StandardCharsets;
-import java.sql.Connection;
-import java.util.Arrays;
-import java.util.List;
-
-import javax.sql.DataSource;
-
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.jdbc.ScriptRunner;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
+import cn.hutool.core.util.StrUtil;
 import com.dwi.basic.database.properties.DatabaseProperties;
 import com.dwi.basic.exception.BizException;
 import com.dwi.basic.utils.StrPool;
 import com.dwi.saas.tenant.biz.dao.InitDbMapper;
 import com.dwi.saas.tenant.biz.strategy.InitSystemStrategy;
 import com.dwi.saas.tenant.domain.dto.TenantConnectDTO;
-//import com.dwi.saas.tenant.domain.strategy.InitSystemStrategy;
 
-import cn.hutool.core.util.StrUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.jdbc.ScriptRunner;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.sql.DataSource;
+import java.io.StringReader;
+import java.nio.charset.StandardCharsets;
+import java.sql.Connection;
+import java.util.Arrays;
+import java.util.List;
+
+import static com.dwi.saas.common.constant.BizConstant.BASE_DATABASE;
+import static com.dwi.saas.common.constant.BizConstant.EXTEND_DATABASE;
 
 /**
  * 初始化系统
@@ -52,7 +50,7 @@ public class SchemaInitSystemStrategy implements InitSystemStrategy {
      * 需要初始化的库
      * 可能不同的服务，会连接不同的库
      */
-    private static final List<String> INIT_DATABASE_LIST = Arrays.asList(BASE_DATABASE);
+    private static final List<String> INIT_DATABASE_LIST = Arrays.asList(BASE_DATABASE, EXTEND_DATABASE);
 
     private final DataSource dataSource;
     private final InitDbMapper initDbMapper;
@@ -163,7 +161,7 @@ public class SchemaInitSystemStrategy implements InitSystemStrategy {
 
             Resources.setCharset(StandardCharsets.UTF_8);
 
-            //            设置分隔符 runner.setDelimiter(";");
+//            设置分隔符 runner.setDelimiter(";");
             runner.setFullLineDelimiter(false);
             return runner;
         } catch (Exception ex) {

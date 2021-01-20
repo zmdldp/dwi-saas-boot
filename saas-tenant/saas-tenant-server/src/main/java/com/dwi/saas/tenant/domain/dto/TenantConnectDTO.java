@@ -13,6 +13,8 @@ import javax.validation.constraints.NotNull;
 
 import com.dwi.saas.tenant.domain.enumeration.TenantConnectTypeEnum;
 
+
+
 /**
  * 租户连接
  *

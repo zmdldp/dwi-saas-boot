@@ -1,19 +1,12 @@
 package com.dwi.saas.authority.controller.auth;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.dwi.basic.annotation.security.PreAuth;
 import com.dwi.basic.annotation.user.LoginUser;
 import com.dwi.basic.base.R;
 import com.dwi.basic.base.controller.SuperCacheController;
 import com.dwi.basic.security.model.SysUser;
 import com.dwi.basic.security.properties.SecurityProperties;
+import com.dwi.basic.utils.BeanPlusUtil;
 import com.dwi.basic.utils.CollHelper;
 import com.dwi.basic.utils.StrPool;
 import com.dwi.saas.authority.biz.service.auth.ResourceService;
@@ -23,15 +16,26 @@ import com.dwi.saas.authority.domain.dto.auth.ResourceQueryDTO;
 import com.dwi.saas.authority.domain.dto.auth.ResourceSaveDTO;
 import com.dwi.saas.authority.domain.dto.auth.ResourceUpdateDTO;
 import com.dwi.saas.authority.domain.entity.auth.Resource;
+//import com.dwi.saas.oauth.controller.AuthorityResourceDTO;
+//import com.dwi.saas.oauth.controller.ResourceQueryDTO;
+//import com.dwi.saas.oauth.controller.Role;
+//import com.dwi.saas.oauth.controller.RoleService;
 import com.dwi.saas.authority.domain.entity.auth.Role;
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import springfox.documentation.annotations.ApiIgnore;
+
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -50,14 +54,14 @@ import springfox.documentation.annotations.ApiIgnore;
 @PreAuth(replace = "authority:resource:")
 @RequiredArgsConstructor
 public class ResourceController extends SuperCacheController<ResourceService, Long, Resource, Resource, ResourceSaveDTO, ResourceUpdateDTO> {
-
-    private final RoleService roleService;
-
-    private final SecurityProperties securityProperties;
-
-    @Override
+   
+	private final RoleService roleService;
+	
+	private final SecurityProperties securityProperties;
+	
+	@Override
     public R<Resource> handlerSave(ResourceSaveDTO data) {
-        Resource resource = BeanUtil.toBean(data, Resource.class);
+        Resource resource = BeanPlusUtil.toBean(data, Resource.class);
         baseService.saveWithCache(resource);
         return success(resource);
     }
@@ -69,10 +73,13 @@ public class ResourceController extends SuperCacheController<ResourceService, Lo
 
     @Override
     public R<Resource> handlerUpdate(ResourceUpdateDTO data) {
-        Resource resource = BeanUtil.toBean(data, Resource.class);
+        Resource resource = BeanPlusUtil.toBean(data, Resource.class);
         baseService.updateById(resource);
         return success(resource);
     }
+    
+    
+    //move from Oauth
 
     /**
      * 查询用户可用的所有资源
@@ -100,6 +107,4 @@ public class ResourceController extends SuperCacheController<ResourceService, Lo
                 .enabled(securityProperties.getEnabled())
                 .build());
     }
-
-
 }

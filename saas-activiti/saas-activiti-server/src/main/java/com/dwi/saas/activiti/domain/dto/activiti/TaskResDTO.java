@@ -2,8 +2,7 @@ package com.dwi.saas.activiti.domain.dto.activiti;
 
 import com.dwi.basic.annotation.injection.InjectionField;
 import com.dwi.basic.model.RemoteData;
-//import com.dwi.saas.authority.domain.entity.auth.User;
-import com.dwi.saas.authority.api.domain.User;
+import com.dwi.saas.authority.domain.entity.auth.User;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

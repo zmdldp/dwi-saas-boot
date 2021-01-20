@@ -33,8 +33,8 @@ import com.dwi.saas.activiti.domain.dto.biz.BizItemResDTO;
 import com.dwi.saas.activiti.domain.entity.biz.BizItem;
 import com.dwi.saas.activiti.domain.entity.biz.BizLeave;
 import com.dwi.saas.activiti.domain.entity.biz.BizReimbursement;
-import com.dwi.saas.authority.api.UserBizApi;
-import com.dwi.saas.authority.api.domain.User;
+import com.dwi.saas.authority.UserApi;
+import com.dwi.saas.authority.domain.entity.auth.User;
 import com.google.common.collect.ImmutableMap;
 
 import cn.hutool.core.collection.CollUtil;
@@ -58,7 +58,7 @@ public class BizItemServiceImpl extends SuperServiceImpl<BizItemMapper, BizItem>
     private final MyProcessInstantService myProcessInstantService;
     private final BizLeaveMapper bizLeaveMapper;
     private final BizReimbursementMapper reimbursementMapper;
-    private final UserBizApi userBizApi;
+    private final UserApi userApi;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -98,7 +98,7 @@ public class BizItemServiceImpl extends SuperServiceImpl<BizItemMapper, BizItem>
 
         List<Long> userIds = list.stream().map(SuperEntity::getCreatedBy).collect(Collectors.toList());
 
-        R<List<User>> users = userBizApi.findUserById(userIds);
+        R<List<User>> users = userApi.findUserById(userIds);
         if (CollUtil.isNotEmpty(users.getData())) {
             List<User> data = users.getData();
             list.forEach(inst -> data.forEach(user -> {

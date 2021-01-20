@@ -3,7 +3,7 @@ package com.dwi.saas.authority.biz.event.listener;
 import com.dwi.basic.context.ContextUtil;
 import com.dwi.saas.authority.biz.event.ParameterUpdateEvent;
 import com.dwi.saas.authority.biz.event.model.ParameterUpdate;
-import com.dwi.saas.authority.biz.service.auth.OnlineService;
+//import com.dwi.saas.authority.biz.service.auth.OnlineService;
 import com.dwi.saas.common.constant.ParameterKey;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ParameterUpdateListener {
 
-    private final OnlineService onlineService;
+    //private final OnlineService onlineService;
 
     @Async
     @EventListener({ParameterUpdateEvent.class})
@@ -31,7 +31,7 @@ public class ParameterUpdateListener {
 
         ContextUtil.setTenant(source.getTenant());
         if (ParameterKey.LOGIN_POLICY.equals(source.getKey())) {
-            onlineService.reset();
+           // onlineService.reset();
         }
     }
 }

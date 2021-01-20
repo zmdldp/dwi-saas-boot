@@ -33,8 +33,8 @@ import com.dwi.saas.activiti.biz.exception.MyActivitiExceptionCode;
 import com.dwi.saas.activiti.biz.exception.MyException;
 import com.dwi.saas.activiti.domain.dto.activiti.InstantSelectReqDTO;
 import com.dwi.saas.activiti.domain.dto.activiti.ProcessInstanceResDTO;
-import com.dwi.saas.authority.api.UserBizApi;
-import com.dwi.saas.authority.api.domain.User;
+import com.dwi.saas.authority.UserApi;
+import com.dwi.saas.authority.domain.entity.auth.User;
 import com.google.common.collect.ImmutableMap;
 
 import cn.hutool.core.collection.CollUtil;
@@ -56,7 +56,7 @@ public class MyProcessInstantService {
     private final RuntimeService runtimeService;
     private final HistoryService historyService;
     private final IdentityService identityService;
-    private final UserBizApi userBizApi;
+    private final UserApi UserApi;
 
     /**
      * 保存实体
@@ -251,7 +251,7 @@ public class MyProcessInstantService {
 
         List<Long> userIds = list.stream().map(inst -> inst.getStartUser().getKey()).collect(Collectors.toList());
 
-        R<List<User>> users = userBizApi.findUserById(userIds);
+        R<List<User>> users = UserApi.findUserById(userIds);
         if (CollUtil.isNotEmpty(users.getData())) {
             List<User> data = users.getData();
             list.forEach(inst -> data.forEach(user -> {
@@ -307,7 +307,7 @@ public class MyProcessInstantService {
 
         List<Long> userIds = list.stream().map(inst -> inst.getStartUser().getKey()).collect(Collectors.toList());
 
-        R<List<User>> users = userBizApi.findUserById(userIds);
+        R<List<User>> users = UserApi.findUserById(userIds);
         if (CollUtil.isNotEmpty(users.getData())) {
             List<User> data = users.getData();
             list.forEach(inst -> data.forEach(user -> {

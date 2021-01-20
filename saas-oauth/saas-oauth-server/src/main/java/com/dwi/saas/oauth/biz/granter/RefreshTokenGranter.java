@@ -16,6 +16,12 @@
 
 package com.dwi.saas.oauth.biz.granter;
 
+import static com.dwi.saas.oauth.biz.granter.RefreshTokenGranter.GRANT_TYPE;
+
+import java.time.LocalDateTime;
+
+import org.springframework.stereotype.Component;
+
 import com.dwi.basic.base.R;
 import com.dwi.basic.context.ContextConstants;
 import com.dwi.basic.database.properties.DatabaseProperties;
@@ -23,24 +29,15 @@ import com.dwi.basic.jwt.TokenUtil;
 import com.dwi.basic.jwt.model.AuthInfo;
 import com.dwi.basic.utils.SpringUtils;
 import com.dwi.basic.utils.StrHelper;
-import com.dwi.saas.authority.api.ApplicationBizApi;
-//import com.dwi.saas.authority.api.OnlineBizApi;
-import com.dwi.saas.authority.api.UserBizApi;
-//import com.dwi.saas.authority.api.domain.LoginParamDTO;
-//import com.dwi.saas.authority.api.domain.Online;
-import com.dwi.saas.authority.api.domain.User;
+import com.dwi.saas.authority.ApplicationApi;
+import com.dwi.saas.authority.UserApi;
+import com.dwi.saas.authority.domain.entity.auth.User;
 import com.dwi.saas.oauth.biz.event.LoginEvent;
 import com.dwi.saas.oauth.biz.event.model.LoginStatusDTO;
 import com.dwi.saas.oauth.biz.service.OnlineService;
 import com.dwi.saas.oauth.domain.LoginParamDTO;
 import com.dwi.saas.oauth.domain.Online;
 import com.dwi.saas.tenant.TenantApi;
-
-import org.springframework.stereotype.Component;
-
-import static com.dwi.saas.oauth.biz.granter.RefreshTokenGranter.GRANT_TYPE;
-
-import java.time.LocalDateTime;
 
 /**
  * RefreshTokenGranter
@@ -54,10 +51,10 @@ public class RefreshTokenGranter extends AbstractTokenGranter implements TokenGr
 
     public static final String GRANT_TYPE = "refresh_token";
 
-    public RefreshTokenGranter(TokenUtil tokenUtil, UserBizApi userBizApi,
-			   TenantApi tenantApi, ApplicationBizApi applicationBizApi,
+    public RefreshTokenGranter(TokenUtil tokenUtil, UserApi userApi,
+			   TenantApi tenantApi, ApplicationApi applicationApi,
             DatabaseProperties databaseProperties, OnlineService onlineService) {
- 	super(tokenUtil, userBizApi, tenantApi, applicationBizApi, databaseProperties, onlineService);
+ 	super(tokenUtil, userApi, tenantApi, applicationApi, databaseProperties, onlineService);
     }
 
 
@@ -79,7 +76,7 @@ public class RefreshTokenGranter extends AbstractTokenGranter implements TokenGr
         if (!ContextConstants.REFRESH_TOKEN_KEY.equals(authInfo.getTokenType())) {
             return R.fail("refreshToken无效，无法加载用户信息");
         }
-        R<User> result = userBizApi.getByIdCache(authInfo.getUserId());
+        R<User> result = userApi.getByIdCache(authInfo.getUserId());
         User user = null;
         if(result!=null && result.getIsSuccess()) {
         	user = result.getData();

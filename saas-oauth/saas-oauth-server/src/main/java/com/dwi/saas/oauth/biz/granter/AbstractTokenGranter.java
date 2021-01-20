@@ -12,10 +12,12 @@
  */
 package com.dwi.saas.oauth.biz.granter;
 
-import cn.hutool.core.convert.Convert;
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.crypto.SecureUtil;
-import cn.hutool.extra.servlet.ServletUtil;
+import static com.dwi.basic.context.ContextConstants.BASIC_HEADER_KEY;
+import static com.dwi.basic.utils.BizAssert.gt;
+import static com.dwi.basic.utils.BizAssert.notNull;
+
+import java.time.LocalDateTime;
+
 import com.dwi.basic.base.R;
 import com.dwi.basic.boot.utils.WebUtils;
 import com.dwi.basic.context.ContextUtil;
@@ -31,20 +33,10 @@ import com.dwi.basic.utils.BizAssert;
 import com.dwi.basic.utils.SpringUtils;
 import com.dwi.basic.utils.StrHelper;
 import com.dwi.basic.utils.StrPool;
-import com.dwi.saas.authority.api.ApplicationBizApi;
-//import com.dwi.saas.authority.api.OnlineBizApi;
-import com.dwi.saas.authority.api.UserBizApi;
-import com.dwi.saas.authority.api.domain.Application;
-//import com.dwi.saas.authority.api.domain.LoginParamDTO;
-//import com.dwi.saas.authority.api.domain.Online;
-import com.dwi.saas.authority.api.domain.User;
-//import com.dwi.saas.authority.biz.service.auth.ApplicationService;
-//import com.dwi.saas.authority.biz.service.auth.OnlineService;
-//import com.dwi.saas.authority.biz.service.auth.UserService;
-//import com.dwi.saas.authority.domain.dto.auth.LoginParamDTO;
-//import com.dwi.saas.authority.domain.dto.auth.Online;
-//import com.dwi.saas.authority.domain.entity.auth.Application;
-//import com.dwi.saas.authority.domain.entity.auth.User;
+import com.dwi.saas.authority.ApplicationApi;
+import com.dwi.saas.authority.UserApi;
+import com.dwi.saas.authority.domain.entity.auth.Application;
+import com.dwi.saas.authority.domain.entity.auth.User;
 import com.dwi.saas.oauth.biz.event.LoginEvent;
 import com.dwi.saas.oauth.biz.event.model.LoginStatusDTO;
 import com.dwi.saas.oauth.biz.service.OnlineService;
@@ -53,16 +45,14 @@ import com.dwi.saas.oauth.domain.LoginParamDTO;
 import com.dwi.saas.oauth.domain.Online;
 import com.dwi.saas.tenant.TenantApi;
 import com.dwi.saas.tenant.domain.entity.Tenant;
-import com.dwi.saas.tenant.domain.enumeration.TenantStatusEnum;
+import com.dwi.saas.tenant.init.domain.enumeration.TenantStatusEnum;
 
+import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.crypto.SecureUtil;
+import cn.hutool.extra.servlet.ServletUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
-import java.time.LocalDateTime;
-
-import static com.dwi.basic.context.ContextConstants.BASIC_HEADER_KEY;
-import static com.dwi.basic.utils.BizAssert.gt;
-import static com.dwi.basic.utils.BizAssert.notNull;
 
 /**
  * 验证码TokenGranter
@@ -80,15 +70,15 @@ public abstract class AbstractTokenGranter implements TokenGranter {
      
     protected final TokenUtil tokenUtil;
     
-    protected final UserBizApi userBizApi;
+    protected final UserApi userApi;
     
     protected final TenantApi tenantApi;
     
-    protected final ApplicationBizApi applicationBizApi;
+    protected final ApplicationApi applicationApi;
     
     protected final DatabaseProperties databaseProperties;
     
-//    protected final OnlineBizApi onlineBizApi;  
+//    protected final OnlineApi onlineApi;  
     protected final OnlineService onlineService;
  
 
@@ -160,7 +150,7 @@ public abstract class AbstractTokenGranter implements TokenGranter {
         String basicHeader = ServletUtil.getHeader(WebUtils.request(), BASIC_HEADER_KEY, StrPool.UTF_8);
         String[] client = JwtUtil.getClient(basicHeader);
         Application application = null;
-        R<Application> result = applicationBizApi.getApplicationByClient(client[0], client[1]);
+        R<Application> result = applicationApi.getApplicationByClient(client[0], client[1]);
         if(result.getIsSuccess()) {
         	application = result.getData();
         }
@@ -184,7 +174,7 @@ public abstract class AbstractTokenGranter implements TokenGranter {
      */
     protected R<User> getUser(String account, String password) {
         //User user = this.userService.getByAccount(account);
-    	R<User> result = userBizApi.getByAccount(account);
+    	R<User> result = userApi.getByAccount(account);
     	User user = null;
     	if (result.getIsSuccess()) {
     		user = result.getData();

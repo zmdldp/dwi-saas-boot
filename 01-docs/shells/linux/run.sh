@@ -43,12 +43,12 @@ function stop()
 	count=`ps -ef | grep java | grep $MODULER | grep -v grep | wc -l`
 
 	if [ $count != 0 ];then
-	    kill $pid
-    	count=`ps -ef | grep java | grep $MODULER | grep -v grep | wc -l`
+	    # 优雅停机
+	    kill -2 $pid
 
-      pid=`ps -ef | grep java | grep $MODULER | grep -v grep | awk '{print $2}'`
-
-      kill -2 $pid
+      # 停机后， 可以再次确认， 强制停机
+      #pid=`ps -ef | grep java | grep $MODULER | grep -v grep | awk '{print $2}'`
+      #kill -9 $pid
       echo "Stop $MODULER Success"
 	fi
 }

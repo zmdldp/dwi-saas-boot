@@ -3,29 +3,29 @@
 //import com.baidu.fsg.uid.UidGenerator;
 //import com.dwi.basic.context.ContextUtil;
 //import com.dwi.basic.database.mybatis.auth.DataScopeType;
-//import com.dwi.saas.authority.entity.auth.Application;
-//import com.dwi.saas.authority.entity.auth.Menu;
-//import com.dwi.saas.authority.entity.auth.Resource;
-//import com.dwi.saas.authority.entity.auth.Role;
-//import com.dwi.saas.authority.entity.auth.RoleAuthority;
-//import com.dwi.saas.authority.entity.auth.User;
-//import com.dwi.saas.authority.entity.common.Dictionary;
-//import com.dwi.saas.authority.entity.common.Parameter;
-//import com.dwi.saas.authority.enumeration.auth.ApplicationAppTypeEnum;
-//import com.dwi.saas.authority.enumeration.auth.AuthorizeType;
-//import com.dwi.saas.authority.enumeration.auth.Sex;
-//import com.dwi.saas.authority.service.auth.ApplicationService;
-//import com.dwi.saas.authority.service.auth.MenuService;
-//import com.dwi.saas.authority.service.auth.ResourceService;
-//import com.dwi.saas.authority.service.auth.RoleAuthorityService;
-//import com.dwi.saas.authority.service.auth.RoleService;
-//import com.dwi.saas.authority.service.auth.UserService;
-//import com.dwi.saas.authority.service.common.DictionaryService;
-//import com.dwi.saas.authority.service.common.ParameterService;
+////import com.dwi.saas.authority.entity.auth.Application;
+////import com.dwi.saas.authority.entity.auth.Menu;
+////import com.dwi.saas.authority.entity.auth.Resource;
+////import com.dwi.saas.authority.entity.auth.Role;
+////import com.dwi.saas.authority.entity.auth.RoleAuthority;
+////import com.dwi.saas.authority.entity.auth.User;
+////import com.dwi.saas.authority.entity.common.Dictionary;
+////import com.dwi.saas.authority.entity.common.Parameter;
+////import com.dwi.saas.authority.enumeration.auth.ApplicationAppTypeEnum;
+////import com.dwi.saas.authority.enumeration.auth.AuthorizeType;
+////import com.dwi.saas.authority.enumeration.auth.Sex;
+////import com.dwi.saas.authority.service.auth.ApplicationService;
+////import com.dwi.saas.authority.service.auth.MenuService;
+////import com.dwi.saas.authority.service.auth.ResourceService;
+////import com.dwi.saas.authority.service.auth.RoleAuthorityService;
+////import com.dwi.saas.authority.service.auth.RoleService;
+////import com.dwi.saas.authority.service.auth.UserService;
+////import com.dwi.saas.authority.service.common.DictionaryService;
+////import com.dwi.saas.authority.service.common.ParameterService;
 //import com.dwi.saas.common.constant.DictionaryType;
 //import com.dwi.saas.common.constant.ParameterKey;
+//import com.dwi.saas.tenant.biz.strategy.InitSystemStrategy;
 //import com.dwi.saas.tenant.domain.dto.TenantConnectDTO;
-//import com.dwi.saas.tenant.domain.strategy.InitSystemStrategy;
 //
 //import lombok.RequiredArgsConstructor;
 //import lombok.extern.slf4j.Slf4j;
@@ -44,6 +44,7 @@
 // * @author dwi
 // * @date 2020年04月05日13:14:28
 // */
+//// TODO 待优化
 //@Service("COLUMN")
 //@Slf4j
 //@RequiredArgsConstructor
@@ -68,6 +69,9 @@
 //    private static final String SMS_TEMPLATE = "smsTemplate";
 //    private static final String MSG = "msg";
 //    private static final String ATTACHMENT = "attachment";
+//    private final UidGenerator uidGenerator;
+//    
+//    private final UserService userService;
 //    private final MenuService menuService;
 //    private final ResourceService resourceService;
 //    private final RoleService roleService;
@@ -75,8 +79,6 @@
 //    private final ApplicationService applicationService;
 //    private final DictionaryService dictionaryService;
 //    private final ParameterService parameterService;
-//    private final UidGenerator uidGenerator;
-//    private final UserService userService;
 //
 //    /**
 //     * 我*，这种方式太脑残了，但想不出更好的方式初始化数据，希望各位大神有好的初始化方法记得跟我说声！！！

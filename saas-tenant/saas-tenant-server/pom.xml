@@ -23,7 +23,7 @@
         
         <dependency>
             <groupId>com.dwi.saas</groupId>
-            <artifactId>saas-tenant-datasource</artifactId>
+            <artifactId>saas-common</artifactId>
             <version>${saas-project.version}</version>
         </dependency>
         

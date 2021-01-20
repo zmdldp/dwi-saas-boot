@@ -26,8 +26,8 @@ import com.dwi.saas.sms.domain.enumeration.ProviderType;
 import com.dwi.saas.sms.domain.enumeration.SendStatus;
 import com.dwi.saas.sms.domain.enumeration.SourceType;
 import com.dwi.saas.sms.domain.enumeration.TaskStatus;
-import com.dwi.saas.tenant.domain.enumeration.TenantStatusEnum;
 import com.dwi.saas.tenant.domain.enumeration.TenantTypeEnum;
+import com.dwi.saas.tenant.init.domain.enumeration.TenantStatusEnum;
 
 import cn.hutool.core.util.ArrayUtil;
 import io.swagger.annotations.Api;

@@ -7,7 +7,7 @@ import com.dwi.basic.base.R;
 import com.dwi.basic.cache.model.CacheKey;
 import com.dwi.basic.cache.repository.CachePlusOps;
 import com.dwi.basic.utils.StrPool;
-import com.dwi.saas.authority.api.ParameterBizApi;
+import com.dwi.saas.authority.ParameterApi;
 //import com.dwi.saas.authority.biz.service.auth.OnlineService;
 //import com.dwi.saas.authority.biz.service.common.ParameterService;
 //import com.dwi.saas.authority.domain.dto.auth.Online;
@@ -43,7 +43,7 @@ import java.util.stream.Collectors;
 public class OnlineServiceImpl implements OnlineService {
 
     //private final ParameterService parameterService;
-	private final ParameterBizApi parameterBizApi;
+	private final ParameterApi parameterApi;
     private final CachePlusOps cacheOps;
 
     @Override
@@ -68,7 +68,7 @@ public class OnlineServiceImpl implements OnlineService {
      */
     @Override
     public boolean save(Online model) {
-    	R<String> result = parameterBizApi.getValue(ParameterKey.LOGIN_POLICY, ParameterKey.LoginPolicy.MANY.name());
+    	R<String> result = parameterApi.getValue(ParameterKey.LOGIN_POLICY, ParameterKey.LoginPolicy.MANY.name());
     	String loginPolicy = null;
     	if(result!=null) {
     		loginPolicy = result.getData();
@@ -98,7 +98,7 @@ public class OnlineServiceImpl implements OnlineService {
     @Override
     public boolean clear(String token, Long userId, String clientId) {
         //String loginPolicy = parameterService.getValue(ParameterKey.LOGIN_POLICY, ParameterKey.LoginPolicy.MANY.name());
-    	R<String> result = parameterBizApi.getValue(ParameterKey.LOGIN_POLICY, ParameterKey.LoginPolicy.MANY.name());
+    	R<String> result = parameterApi.getValue(ParameterKey.LOGIN_POLICY, ParameterKey.LoginPolicy.MANY.name());
     	String loginPolicy = null;
     	if(result!=null) {
     		loginPolicy = result.getData();

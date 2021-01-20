@@ -1,10 +1,23 @@
 package com.dwi.saas.tenant.controller;
 
 
-import static com.dwi.saas.tenant.domain.enumeration.TenantStatusEnum.NORMAL;
+import com.dwi.basic.annotation.log.SysLog;
+import com.dwi.basic.annotation.security.PreAuth;
+import com.dwi.basic.base.R;
+import com.dwi.basic.base.controller.SuperCacheController;
+import com.dwi.basic.database.mybatis.conditions.Wraps;
+import com.dwi.saas.tenant.TenantApi;
+import com.dwi.saas.tenant.biz.service.TenantService;
+import com.dwi.saas.tenant.domain.dto.TenantPageQuery;
+import com.dwi.saas.tenant.domain.dto.TenantSaveDTO;
+import com.dwi.saas.tenant.domain.dto.TenantUpdateDTO;
+import com.dwi.saas.tenant.domain.entity.Tenant;
+import com.dwi.saas.tenant.domain.dto.TenantConnectDTO;
+import com.dwi.saas.tenant.domain.enumeration.TenantStatusEnum;
 
-import java.util.List;
-
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,22 +28,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dwi.basic.annotation.log.SysLog;
-import com.dwi.basic.annotation.security.PreAuth;
-import com.dwi.basic.base.R;
-import com.dwi.basic.base.controller.SuperCacheController;
-import com.dwi.basic.database.mybatis.conditions.Wraps;
-import com.dwi.saas.tenant.TenantApi;
-import com.dwi.saas.tenant.biz.service.TenantService;
-import com.dwi.saas.tenant.domain.dto.TenantConnectDTO;
-import com.dwi.saas.tenant.domain.dto.TenantPageQuery;
-import com.dwi.saas.tenant.domain.dto.TenantSaveDTO;
-import com.dwi.saas.tenant.domain.dto.TenantUpdateDTO;
-import com.dwi.saas.tenant.domain.entity.Tenant;
+import static com.dwi.saas.tenant.domain.enumeration.TenantStatusEnum.NORMAL;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * <p>
@@ -64,8 +66,9 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/tenant")
 @Api(value = "Tenant", tags = "企业")
 @SysLog(enabled = false)
-public class TenantController extends SuperCacheController<TenantService, Long, Tenant, TenantPageQuery, TenantSaveDTO, TenantUpdateDTO>
-implements TenantApi{
+public class TenantController extends SuperCacheController<TenantService, Long, Tenant, TenantPageQuery, TenantSaveDTO, TenantUpdateDTO> 
+	implements TenantApi{
+
     @ApiOperation(value = "查询所有企业", notes = "查询所有企业")
     @GetMapping("/all")
     public R<List<Tenant>> list() {
@@ -94,25 +97,31 @@ implements TenantApi{
 
     @ApiOperation(value = "删除租户和基础租户数据，请谨慎操作")
     @DeleteMapping("/deleteAll")
-    @PreAuth("hasAnyRole('SUPER_ADMIN')")
+    @PreAuth("hasAnyRole('PT_ADMIN')")
     public R<Boolean> deleteAll(@RequestParam("ids[]") List<Long> ids) {
         return success(baseService.deleteAll(ids));
+    }
+
+    @ApiOperation(value = "修改租户状态", notes = "修改租户状态")
+    @PostMapping("/status")
+    public R<Boolean> updateStatus(@RequestParam("ids[]") List<Long> ids,
+                                   @RequestParam(defaultValue = "FORBIDDEN") @NotNull(message = "状态不能为空") TenantStatusEnum status) {
+        return success(baseService.updateStatus(ids, status));
     }
 
 
     /**
      * 初始化
-     *
      */
     @ApiOperation(value = "连接数据源", notes = "连接数据源")
     @PostMapping("/initConnect")
     public R<Boolean> initConnect(@RequestBody TenantConnectDTO tenantConnect) {
         return success(baseService.connect(tenantConnect));
     }
-
+    
     /**
      * 根据租户编码查询租户信息 ADD 2020-12-17
-     *
+     * 
      * @param tenantCode
      * @return
      */

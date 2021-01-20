@@ -12,6 +12,7 @@ import com.dwi.basic.base.request.PageUtil;
 import com.dwi.basic.base.service.SuperCacheServiceImpl;
 import com.dwi.basic.cache.model.CacheKey;
 import com.dwi.basic.cache.model.CacheKeyBuilder;
+import com.dwi.basic.context.ContextUtil;
 import com.dwi.basic.database.mybatis.auth.DataScope;
 import com.dwi.basic.database.mybatis.auth.DataScopeType;
 import com.dwi.basic.database.mybatis.conditions.Wraps;
@@ -110,12 +111,12 @@ public class UserServiceImpl extends SuperCacheServiceImpl<UserMapper, User> imp
         return baseMapper.findPage(page, wrapper, new DataScope());
     }
 
-
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Boolean updatePassword(UserUpdatePasswordDTO data) {
         User user = getById(data.getId());
         BizAssert.notNull(user, "用户不存在");
+        BizAssert.isTrue(user.getId().equals(ContextUtil.getUserId()), "只能修改自己的密码");
         String oldPassword = SecureUtil.sha256(data.getOldPassword() + user.getSalt());
         BizAssert.equals(user.getPassword(), oldPassword, "旧密码错误");
 
@@ -195,7 +196,8 @@ public class UserServiceImpl extends SuperCacheServiceImpl<UserMapper, User> imp
 
     @Override
     public boolean check(String account) {
-        return getByAccount(account) != null;
+        //这里不能用缓存，否则会导致用户无法登录
+        return count(Wraps.<User>lbQ().eq(User::getAccount, account)) > 0;
     }
 
     @Override

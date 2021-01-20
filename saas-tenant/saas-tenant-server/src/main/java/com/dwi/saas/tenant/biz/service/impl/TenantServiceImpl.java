@@ -12,11 +12,11 @@ import com.dwi.saas.common.cache.tenant.TenantCodeCacheKeyBuilder;
 import com.dwi.saas.tenant.biz.dao.TenantMapper;
 import com.dwi.saas.tenant.biz.service.TenantService;
 import com.dwi.saas.tenant.biz.strategy.InitSystemContext;
-import com.dwi.saas.tenant.domain.dto.TenantConnectDTO;
 import com.dwi.saas.tenant.domain.dto.TenantSaveDTO;
 import com.dwi.saas.tenant.domain.entity.Tenant;
-import com.dwi.saas.tenant.domain.enumeration.TenantStatusEnum;
 import com.dwi.saas.tenant.domain.enumeration.TenantTypeEnum;
+import com.dwi.saas.tenant.domain.dto.TenantConnectDTO;
+import com.dwi.saas.tenant.domain.enumeration.TenantStatusEnum;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -92,11 +92,15 @@ public class TenantServiceImpl extends SuperCacheServiceImpl<TenantMapper, Tenan
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Boolean connect(TenantConnectDTO tenantConnect) {
-        boolean flag = initSystemContext.initConnect(tenantConnect);
-        if (flag) {
-            updateById(Tenant.builder().id(tenantConnect.getId()).connectType(tenantConnect.getConnectType())
-                    .status(TenantStatusEnum.NORMAL).build());
-        }
+        return initSystemContext.initConnect(tenantConnect) && updateTenantStatus(tenantConnect);
+    }
+
+    private Boolean updateTenantStatus(TenantConnectDTO tenantConnect) {
+        Boolean flag = this.update(Wraps.<Tenant>lbU()
+                .set(Tenant::getStatus, TenantStatusEnum.NORMAL)
+                .set(Tenant::getConnectType, tenantConnect.getConnectType())
+                .eq(Tenant::getId, tenantConnect.getId()));
+        delCache(tenantConnect.getId());
         return flag;
     }
 
@@ -121,9 +125,18 @@ public class TenantServiceImpl extends SuperCacheServiceImpl<TenantMapper, Tenan
         return initSystemContext.delete(ids, tenantCodeList);
     }
 
-
     @Override
     public List<Tenant> find() {
         return list(Wraps.<Tenant>lbQ().eq(Tenant::getStatus, TenantStatusEnum.NORMAL));
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean updateStatus(List<Long> ids, TenantStatusEnum status) {
+        boolean update = super.update(Wraps.<Tenant>lbU().set(Tenant::getStatus, status)
+                .in(Tenant::getId, ids));
+
+        delCache(ids);
+        return update;
     }
 }

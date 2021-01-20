@@ -43,15 +43,6 @@ public interface BizConstant {
     String DEF_PASSWORD = "123456";
 
     /**
-     * 默认的定时任务组
-     */
-    String DEF_JOB_GROUP_NAME = "saas-jobs-server";
-    /**
-     * 短信发送处理器
-     */
-    String SMS_SEND_JOB_HANDLER = "smsSendJobHandler";
-
-    /**
      * 基础库
      */
     String BASE_DATABASE = "saas_base";
@@ -70,6 +61,8 @@ public interface BizConstant {
     String MSG = "saas-msg-server";
     String OAUTH = "saas-oauth-server";
     String GATE = "saas-gateway-server";
+    String BASE_EXECUTOR = "saas-base-executor";
+    String EXTEND_EXECUTOR = "saas-extend-executor";
     String ORDER = "saas-example-server";
     String DEMO = "saas-demo-server";
 

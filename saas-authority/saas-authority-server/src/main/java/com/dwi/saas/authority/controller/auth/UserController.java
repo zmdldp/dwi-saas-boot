@@ -1,26 +1,12 @@
 package com.dwi.saas.authority.controller.auth;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.groups.Default;
-
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-
+import cn.afterturn.easypoi.excel.ExcelImportUtil;
+import cn.afterturn.easypoi.excel.entity.ImportParams;
+import cn.afterturn.easypoi.excel.entity.result.ExcelImportResult;
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.RandomUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.dwi.basic.annotation.log.SysLog;
 import com.dwi.basic.annotation.security.PreAuth;
@@ -35,10 +21,11 @@ import com.dwi.basic.model.RemoteData;
 import com.dwi.basic.security.feign.UserQuery;
 import com.dwi.basic.security.model.SysUser;
 import com.dwi.basic.utils.StrPool;
+import com.dwi.saas.authority.UserApi;
 import com.dwi.saas.authority.biz.service.auth.UserService;
 import com.dwi.saas.authority.biz.service.common.DictionaryService;
 import com.dwi.saas.authority.biz.service.core.OrgService;
-import com.dwi.saas.authority.controller.poi.ExcelUserVerifyHandlerImpl;
+import com.dwi.saas.authority.biz.service.poi.ExcelUserVerifyHandlerImpl;
 import com.dwi.saas.authority.domain.dto.auth.UserExcelVO;
 import com.dwi.saas.authority.domain.dto.auth.UserPageQuery;
 import com.dwi.saas.authority.domain.dto.auth.UserRoleDTO;
@@ -52,18 +39,29 @@ import com.dwi.saas.authority.domain.entity.common.Dictionary;
 import com.dwi.saas.authority.domain.entity.core.Org;
 import com.dwi.saas.common.constant.BizConstant;
 import com.dwi.saas.common.constant.DictionaryType;
-
-import cn.afterturn.easypoi.excel.ExcelImportUtil;
-import cn.afterturn.easypoi.excel.entity.ImportParams;
-import cn.afterturn.easypoi.excel.entity.result.ExcelImportResult;
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.util.RandomUtil;
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.crypto.SecureUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.groups.Default;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 
 /**
@@ -82,7 +80,8 @@ import lombok.extern.slf4j.Slf4j;
 @Api(value = "User", tags = "用户")
 @PreAuth(replace = "authority:user:")
 @RequiredArgsConstructor
-public class UserController extends SuperCacheController<UserService, Long, User, UserPageQuery, UserSaveDTO, UserUpdateDTO> {
+public class UserController extends SuperCacheController<UserService, Long, User, UserPageQuery, UserSaveDTO, UserUpdateDTO> 
+	implements UserApi{
     private final OrgService orgService;
     private final ExcelUserVerifyHandlerImpl excelUserVerifyHandler;
     private final DictionaryService dictionaryService;
@@ -126,6 +125,7 @@ public class UserController extends SuperCacheController<UserService, Long, User
         baseService.updateUser(user);
         return success(user);
     }
+    
 
     /**
      * 修改
@@ -200,14 +200,6 @@ public class UserController extends SuperCacheController<UserService, Long, User
         return success(UserRoleDTO.builder().idList(idList).userList(list).build());
     }
 
-
-    @ApiOperation(value = "查询所有用户", notes = "查询所有用户")
-    @GetMapping("/find")
-    @SysLog("查询所有用户")
-    public R<List<Long>> findAllUserId() {
-        return success(baseService.findAllUserId());
-    }
-
     @ApiOperation(value = "查询所有用户实体", notes = "查询所有用户实体")
     @GetMapping("/findAll")
     @SysLog("查询所有用户")
@@ -217,14 +209,9 @@ public class UserController extends SuperCacheController<UserService, Long, User
         return success(res);
     }
 
-    @RequestMapping(value = "/findUserById", method = RequestMethod.GET)
-    public R<List<User>> findUserById(@RequestParam(value = "ids") List<Long> ids) {
-        return this.success(baseService.findUserById(ids));
-    }
-
     @Override
     public R<Boolean> importExcel(@RequestParam("file") MultipartFile simpleFile, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+                                  HttpServletResponse response) throws Exception {
         ImportParams params = new ImportParams();
         params.setTitleRows(0);
         params.setHeadRows(1);
@@ -290,25 +277,24 @@ public class UserController extends SuperCacheController<UserService, Long, User
             wrapper.in(User::getOrg, children.stream().map(org -> new RemoteData(org.getId())).collect(Collectors.toList()));
         }
         wrapper.like(User::getName, userPage.getName())
-        .like(User::getAccount, userPage.getAccount())
-        .eq(User::getReadonly, false)
-        .like(User::getEmail, userPage.getEmail())
-        .like(User::getMobile, userPage.getMobile())
-        .eq(User::getStation, userPage.getStation())
-        .eq(User::getPositionStatus, userPage.getPositionStatus())
-        .eq(User::getEducation, userPage.getEducation())
-        .eq(userPage.getNation() != null && StrUtil.isNotEmpty(userPage.getNation().getKey()), User::getNation, userPage.getNation())
-        .eq(User::getSex, userPage.getSex())
-        .eq(User::getState, userPage.getState());
+                .like(User::getAccount, userPage.getAccount())
+                .eq(User::getReadonly, false)
+                .like(User::getEmail, userPage.getEmail())
+                .like(User::getMobile, userPage.getMobile())
+                .eq(User::getStation, userPage.getStation())
+                .eq(User::getPositionStatus, userPage.getPositionStatus())
+                .eq(User::getEducation, userPage.getEducation())
+                .eq(userPage.getNation() != null && StrUtil.isNotEmpty(userPage.getNation().getKey()), User::getNation, userPage.getNation())
+                .eq(User::getSex, userPage.getSex())
+                .eq(User::getState, userPage.getState());
         baseService.findPage(page, wrapper);
         // 手动注入
         injectionCore.injection(page);
 
         page.getRecords().forEach(item -> item.setPassword(null));
     }
-
-    // move from Oauth
-
+    
+    
     /**
      * 单体查询用户
      *
@@ -320,6 +306,19 @@ public class UserController extends SuperCacheController<UserService, Long, User
     public R<SysUser> getById(@PathVariable Long id, @RequestBody UserQuery query) {
         return R.success(baseService.getSysUserById(id, query));
     }
+    
+    
+    /**
+     * 根据用户ID查询缓存用户信息 ADD 2020-12-16
+     * 
+     * @param userId
+     * @return
+     */
+    @ApiOperation(value = "根据用户ID查询缓存用户信息", notes = "根据用户ID查询缓存用户信息")
+    @Override
+    public R<User> getByIdCache(Long userId) {
+    	return success(baseService.getByIdCache(userId));
+    }
 
     /**
      * 根据用户id，查询用户权限范围
@@ -327,8 +326,34 @@ public class UserController extends SuperCacheController<UserService, Long, User
      * @param id 用户id
      */
     @ApiOperation(value = "查询用户权限范围", notes = "根据用户id，查询用户权限范围")
-    @GetMapping(value = "/ds/{id}")
+    @Override
     public Map<String, Object> getDataScopeById(@PathVariable("id") Long id) {
         return baseService.getDataScopeById(id);
     }
+    
+    @ApiOperation(value = "查询所有用户", notes = "查询所有用户")
+    @SysLog("查询所有用户")
+    @Override
+    public R<List<Long>> findAllUserId() {
+        return success(baseService.findAllUserId());
+    }
+    
+    /**
+     * 查询账户关联用户 ADD 2020-12-16
+     * 
+     * @param account
+     * @return
+     */
+    @ApiOperation(value = "查询账户关联用户", notes = "查询账户关联用户")
+    @Override
+    public R<User> getByAccount(String account) {
+    	return success(baseService.getByAccount(account));
+    }
+    
+    @ApiOperation(value = "根据id集合查询所有的用户", notes = "根据id集合查询所有的用户")
+    @Override
+    public R<List<User>> findUserById(@RequestParam(value = "ids") List<Long> ids) {
+        return this.success(baseService.findUserById(ids));
+    }
+
 }

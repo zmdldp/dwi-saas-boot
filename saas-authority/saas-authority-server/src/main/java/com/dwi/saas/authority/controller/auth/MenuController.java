@@ -1,25 +1,13 @@
 package com.dwi.saas.authority.controller.auth;
 
-import static com.dwi.saas.common.constant.SwaggerConstants.DATA_TYPE_LONG;
-import static com.dwi.saas.common.constant.SwaggerConstants.DATA_TYPE_STRING;
-import static com.dwi.saas.common.constant.SwaggerConstants.PARAM_TYPE_QUERY;
-
-import java.util.List;
-
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.dwi.basic.annotation.log.SysLog;
 import com.dwi.basic.annotation.security.PreAuth;
 import com.dwi.basic.annotation.user.LoginUser;
 import com.dwi.basic.base.R;
 import com.dwi.basic.base.controller.SuperCacheController;
 import com.dwi.basic.database.mybatis.conditions.Wraps;
-import com.dwi.basic.dozer.DozerUtils;
 import com.dwi.basic.security.model.SysUser;
+import com.dwi.basic.utils.BeanPlusUtil;
 import com.dwi.basic.utils.TreeUtil;
 import com.dwi.saas.authority.biz.service.auth.MenuService;
 import com.dwi.saas.authority.domain.dto.auth.MenuSaveDTO;
@@ -27,7 +15,6 @@ import com.dwi.saas.authority.domain.dto.auth.MenuUpdateDTO;
 import com.dwi.saas.authority.domain.dto.auth.VueRouter;
 import com.dwi.saas.authority.domain.entity.auth.Menu;
 
-import cn.hutool.core.bean.BeanUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -35,6 +22,20 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import springfox.documentation.annotations.ApiIgnore;
+
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.dwi.basic.dozer.DozerUtils;
+
+import static com.dwi.saas.common.constant.SwaggerConstants.DATA_TYPE_LONG;
+import static com.dwi.saas.common.constant.SwaggerConstants.DATA_TYPE_STRING;
+import static com.dwi.saas.common.constant.SwaggerConstants.PARAM_TYPE_QUERY;
+
+import java.util.List;
 
 
 /**
@@ -56,17 +57,17 @@ import springfox.documentation.annotations.ApiIgnore;
 public class MenuController extends SuperCacheController<MenuService, Long, Menu, Menu, MenuSaveDTO, MenuUpdateDTO> {
 
     private final DozerUtils dozer;
-
-    @Override
+	
+	@Override
     public R<Menu> handlerSave(MenuSaveDTO menuSaveDTO) {
-        Menu menu = BeanUtil.toBean(menuSaveDTO, Menu.class);
+        Menu menu = BeanPlusUtil.toBean(menuSaveDTO, Menu.class);
         baseService.saveWithCache(menu);
         return success(menu);
     }
 
     @Override
     public R<Menu> handlerUpdate(MenuUpdateDTO model) {
-        Menu menu = BeanUtil.toBean(model, Menu.class);
+        Menu menu = BeanPlusUtil.toBean(model, Menu.class);
         baseService.updateWithCache(menu);
         return success(menu);
     }
@@ -88,10 +89,10 @@ public class MenuController extends SuperCacheController<MenuService, Long, Menu
         List<Menu> list = baseService.list(Wraps.<Menu>lbQ().orderByAsc(Menu::getSortValue));
         return success(TreeUtil.buildTree(list));
     }
-
-
+    
+    
     //move from Oauth
-
+    
     /**
      * 查询用户可用的所有菜单
      *
@@ -99,14 +100,14 @@ public class MenuController extends SuperCacheController<MenuService, Long, Menu
      * @param userId 指定用户id
      */
     @ApiImplicitParams({
-        @ApiImplicitParam(name = "group", value = "菜单组", dataType = DATA_TYPE_STRING, paramType = PARAM_TYPE_QUERY),
-        @ApiImplicitParam(name = "userId", value = "用户id", dataType = DATA_TYPE_LONG, paramType = PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "group", value = "菜单组", dataType = DATA_TYPE_STRING, paramType = PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "userId", value = "用户id", dataType = DATA_TYPE_LONG, paramType = PARAM_TYPE_QUERY),
     })
     @ApiOperation(value = "查询用户可用的所有菜单", notes = "查询用户可用的所有菜单")
     @GetMapping("/menus")
     public R<List<Menu>> myMenus(@RequestParam(value = "group", required = false) String group,
-            @RequestParam(value = "userId", required = false) Long userId,
-            @ApiIgnore @LoginUser SysUser sysUser) {
+                                 @RequestParam(value = "userId", required = false) Long userId,
+                                 @ApiIgnore @LoginUser SysUser sysUser) {
         if (userId == null || userId <= 0) {
             userId = sysUser.getId();
         }
@@ -116,14 +117,14 @@ public class MenuController extends SuperCacheController<MenuService, Long, Menu
     }
 
     @ApiImplicitParams({
-        @ApiImplicitParam(name = "group", value = "菜单组", dataType = DATA_TYPE_STRING, paramType = PARAM_TYPE_QUERY),
-        @ApiImplicitParam(name = "userId", value = "用户id", dataType = DATA_TYPE_LONG, paramType = PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "group", value = "菜单组", dataType = DATA_TYPE_STRING, paramType = PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "userId", value = "用户id", dataType = DATA_TYPE_LONG, paramType = PARAM_TYPE_QUERY),
     })
     @ApiOperation(value = "查询用户可用的所有菜单路由树", notes = "查询用户可用的所有菜单路由树")
     @GetMapping("/router")
     public R<List<VueRouter>> myRouter(@RequestParam(value = "group", required = false) String group,
-            @RequestParam(value = "userId", required = false) Long userId,
-            @ApiIgnore @LoginUser SysUser sysUser) {
+                                       @RequestParam(value = "userId", required = false) Long userId,
+                                       @ApiIgnore @LoginUser SysUser sysUser) {
         if (userId == null || userId <= 0) {
             userId = sysUser.getId();
         }

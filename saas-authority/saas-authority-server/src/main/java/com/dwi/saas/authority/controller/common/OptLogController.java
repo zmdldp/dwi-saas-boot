@@ -1,21 +1,6 @@
 package com.dwi.saas.authority.controller.common;
 
 
-import static com.dwi.saas.common.constant.SwaggerConstants.DATA_TYPE_LONG;
-import static com.dwi.saas.common.constant.SwaggerConstants.PARAM_TYPE_QUERY;
-
-import java.time.LocalDateTime;
-
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.dwi.basic.annotation.log.SysLog;
 import com.dwi.basic.annotation.security.PreAuth;
@@ -26,6 +11,7 @@ import com.dwi.basic.base.controller.SuperSimpleController;
 import com.dwi.basic.base.request.PageParams;
 import com.dwi.basic.log.entity.OptLogDTO;
 import com.dwi.basic.utils.BeanPlusUtil;
+import com.dwi.saas.authority.LogApi;
 import com.dwi.saas.authority.biz.service.common.OptLogService;
 import com.dwi.saas.authority.domain.dto.common.OptLogResult;
 import com.dwi.saas.authority.domain.entity.common.OptLog;
@@ -35,6 +21,20 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.time.LocalDateTime;
+
+import static com.dwi.saas.common.constant.SwaggerConstants.DATA_TYPE_LONG;
+import static com.dwi.saas.common.constant.SwaggerConstants.PARAM_TYPE_QUERY;
 
 /**
  * <p>
@@ -52,7 +52,8 @@ import lombok.extern.slf4j.Slf4j;
 @Api(value = "OptLog", tags = "系统日志")
 @PreAuth(replace = "authority:optLog:")
 public class OptLogController extends SuperSimpleController<OptLogService, OptLog>
-implements DeleteController<OptLog, Long>, PoiController<OptLog, OptLog> {
+        implements DeleteController<OptLog, Long>, PoiController<OptLog, OptLog>,
+        LogApi {
 
     @ApiOperation(value = "分页列表查询")
     @PostMapping(value = "/page")
@@ -70,7 +71,7 @@ implements DeleteController<OptLog, Long>, PoiController<OptLog, OptLog> {
      * @return 查询结果
      */
     @ApiImplicitParams({
-        @ApiImplicitParam(name = "id", value = "主键", dataType = DATA_TYPE_LONG, paramType = PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "id", value = "主键", dataType = DATA_TYPE_LONG, paramType = PARAM_TYPE_QUERY),
     })
     @ApiOperation(value = "单体查询", notes = "单体查询")
     @GetMapping("/{id}")
@@ -109,9 +110,8 @@ implements DeleteController<OptLog, Long>, PoiController<OptLog, OptLog> {
         }
         return success(baseService.clearLog(clearBeforeTime, clearBeforeNum));
     }
-
-    //move from Oauth
-
+    
+    
     /**
      * 保存系统日志
      *
@@ -120,9 +120,10 @@ implements DeleteController<OptLog, Long>, PoiController<OptLog, OptLog> {
      */
     @PostMapping
     @ApiOperation(value = "保存系统日志", notes = "保存系统日志不为空的字段")
-    public R<OptLog> save(@RequestBody OptLogDTO data) {
-        baseService.save(data);
-        return R.success(BeanPlusUtil.toBean(data, OptLog.class));
+    @Override
+    public R<OptLog> save(@RequestBody OptLogDTO log) {
+        baseService.save(log);
+        return R.success(BeanPlusUtil.toBean(log, OptLog.class));
     }
 
 }

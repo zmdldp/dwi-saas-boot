@@ -338,7 +338,7 @@ CREATE TABLE `c_user` (
   `id` bigint(20) NOT NULL COMMENT 'ID',
   `account` varchar(30) NOT NULL DEFAULT '' COMMENT '账号',
   `name` varchar(50) NOT NULL DEFAULT '' COMMENT '姓名',
-  `org_id` bigint(20) DEFAULT NULL COMMENT '组织ID \n#c_org\n@InjectionField(api = ORG_ID_CLASS, method = ORG_ID_METHOD, beanClass = Org.class) RemoteData<Long, com.dwi.saas.authority.entity.core.Org>',
+  `org_id` bigint(20) DEFAULT NULL COMMENT '组织ID \n#c_org\n@InjectionField(api = ORG_ID_CLASS, method = ORG_ID_METHOD, beanClass = Org.class) RemoteData<Long, com.dwi.saas.authority.domain.entity.core.Org>',
   `station_id` bigint(20) DEFAULT NULL COMMENT '岗位ID \n#c_station\n@InjectionField(api = STATION_ID_CLASS, method = STATION_ID_NAME_METHOD) RemoteData<Long, String>',
   `readonly` bit(1) NOT NULL DEFAULT b'0' COMMENT '内置',
   `email` varchar(255) DEFAULT '' COMMENT '邮箱',

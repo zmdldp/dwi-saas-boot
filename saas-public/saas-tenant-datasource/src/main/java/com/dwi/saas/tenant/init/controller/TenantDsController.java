@@ -1,8 +1,8 @@
 package com.dwi.saas.tenant.init.controller;
 
 import com.dwi.basic.base.R;
+import com.dwi.saas.tenant.init.base.dto.DataSourcePropertyDTO;
 import com.dwi.saas.tenant.init.biz.service.DataSourceService;
-import com.dwi.saas.tenant.init.domain.dto.DataSourcePropertyDTO;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

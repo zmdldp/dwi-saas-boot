@@ -8,6 +8,7 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.dwi.basic.annotation.base.IgnoreResponseBodyAdvice;
 import com.dwi.basic.annotation.log.SysLog;
 import com.dwi.basic.annotation.security.PreAuth;
 import com.dwi.basic.base.R;
@@ -326,6 +327,7 @@ public class UserController extends SuperCacheController<UserService, Long, User
      * @param id 用户id
      */
     @ApiOperation(value = "查询用户权限范围", notes = "根据用户id，查询用户权限范围")
+    @IgnoreResponseBodyAdvice
     @Override
     public Map<String, Object> getDataScopeById(@PathVariable("id") Long id) {
         return baseService.getDataScopeById(id);
@@ -355,5 +357,19 @@ public class UserController extends SuperCacheController<UserService, Long, User
     public R<List<User>> findUserById(@RequestParam(value = "ids") List<Long> ids) {
         return this.success(baseService.findUserById(ids));
     }
+    
+	@Override
+	public R<Boolean> resetPassErrorNum(Long userId) {
+		baseService.resetPassErrorNum(userId);
+		return success();
+	}
+
+	@Override
+	public R<Boolean> incrPasswordErrorNumById(Long userId) {
+		baseService.incrPasswordErrorNumById(userId);
+		return success();
+	}
+    
+    
 
 }

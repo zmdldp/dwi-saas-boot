@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dwi.basic.annotation.base.IgnoreResponseBodyAdvice;
 import com.dwi.saas.activiti.biz.service.activiti.MyModelService;
 
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +29,7 @@ import java.util.Map;
 @Slf4j
 @RequestMapping("static")
 @RequiredArgsConstructor
+@IgnoreResponseBodyAdvice
 public class ModelerController {
     private final RepositoryService repositoryService;
     private final MyModelService myModelService;

@@ -3,7 +3,7 @@
 <mapper namespace="com.dwi.saas.tenant.biz.dao.TenantMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="Tenant">
+    <resultMap id="BaseResultMap" type="com.dwi.saas.tenant.domain.entity.Tenant">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="created_by" jdbcType="BIGINT" property="createdBy"/>

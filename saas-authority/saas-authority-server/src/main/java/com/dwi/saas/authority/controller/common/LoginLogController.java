@@ -7,6 +7,7 @@ import com.dwi.basic.base.R;
 import com.dwi.basic.base.controller.SuperController;
 import com.dwi.basic.base.request.PageParams;
 import com.dwi.basic.database.mybatis.conditions.query.QueryWrap;
+import com.dwi.saas.authority.LoginLogApi;
 import com.dwi.saas.authority.biz.service.common.LoginLogService;
 import com.dwi.saas.authority.domain.dto.common.LoginLogUpdateDTO;
 import com.dwi.saas.authority.domain.entity.common.LoginLog;
@@ -37,7 +38,8 @@ import java.time.LocalDateTime;
 @RequestMapping("/loginLog")
 @Api(value = "LoginLog", tags = "登录日志")
 @PreAuth(replace = "authority:loginLog:")
-public class LoginLogController extends SuperController<LoginLogService, Long, LoginLog, LoginLog, LoginLog, LoginLogUpdateDTO> {
+public class LoginLogController extends SuperController<LoginLogService, Long, LoginLog, LoginLog, LoginLog, LoginLogUpdateDTO> 
+	implements LoginLogApi{
 
     /**
      * 分页查询登录日志

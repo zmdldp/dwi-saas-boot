@@ -5,8 +5,8 @@ import com.dwi.basic.database.properties.DatabaseProperties;
 import com.dwi.basic.database.properties.MultiTenantType;
 import com.dwi.saas.gateway.service.BlockListService;
 import com.dwi.saas.gateway.service.RateLimiterService;
+import com.dwi.saas.tenant.init.base.enumeration.TenantStatusEnum;
 import com.dwi.saas.tenant.init.biz.dao.InitDatabaseMapper;
-import com.dwi.saas.tenant.init.domain.enumeration.TenantStatusEnum;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -2,8 +2,8 @@ package com.dwi.saas.authority.config.mq;
 
 import com.alibaba.fastjson.JSONObject;
 import com.dwi.saas.common.constant.BizMqQueue;
+import com.dwi.saas.tenant.init.base.dto.DataSourcePropertyDTO;
 import com.dwi.saas.tenant.init.biz.service.DataSourceService;
-import com.dwi.saas.tenant.init.domain.dto.DataSourcePropertyDTO;
 import com.dwi.basic.database.properties.DatabaseProperties;
 import com.dwi.basic.mq.properties.MqProperties;
 

@@ -1,4 +1,4 @@
-package com.dwi.saas.tenant.init.domain.enumeration;
+package com.dwi.saas.tenant.init.base.enumeration;
 
 import com.dwi.basic.base.BaseEnum;
 
@@ -22,17 +22,33 @@ import java.util.stream.Stream;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(value = "TenantConnectTypeEnum", description = "连接类型-枚举")
-public enum TenantConnectTypeEnum implements BaseEnum {
+@ApiModel(value = "TenantStatusEnum", description = "状态-枚举")
+public enum TenantStatusEnum implements BaseEnum {
 
     /**
-     * LOCAL="本地"
+     * NORMAL="正常"
      */
-    LOCAL("本地"),
+    NORMAL("正常"),
     /**
-     * REMOTE="远程"
+     * WAIT_INIT="待初始化"
      */
-    REMOTE("远程"),
+    WAIT_INIT("待初始化"),
+    /**
+     * FORBIDDEN="禁用"
+     */
+    FORBIDDEN("禁用"),
+    /**
+     * WAITING="待审核"
+     */
+    WAITING("待审核"),
+    /**
+     * REFUSE="拒绝"
+     */
+    REFUSE("拒绝"),
+    /**
+     * DELETE="已删除"
+     */
+    DELETE("已删除"),
     ;
 
     @ApiModelProperty(value = "描述")
@@ -42,20 +58,20 @@ public enum TenantConnectTypeEnum implements BaseEnum {
     /**
      * 根据当前枚举的name匹配
      */
-    public static TenantConnectTypeEnum match(String val, TenantConnectTypeEnum def) {
+    public static TenantStatusEnum match(String val, TenantStatusEnum def) {
         return Stream.of(values()).parallel().filter(item -> item.name().equalsIgnoreCase(val)).findAny().orElse(def);
     }
 
-    public static TenantConnectTypeEnum get(String val) {
+    public static TenantStatusEnum get(String val) {
         return match(val, null);
     }
 
-    public boolean eq(TenantConnectTypeEnum val) {
+    public boolean eq(TenantStatusEnum val) {
         return val != null && eq(val.name());
     }
 
     @Override
-    @ApiModelProperty(value = "编码", allowableValues = "LOCAL,REMOTE", example = "LOCAL")
+    @ApiModelProperty(value = "编码", allowableValues = "NORMAL,WAIT_INIT,FORBIDDEN,WAITING,REFUSE,DELETE", example = "NORMAL")
     public String getCode() {
         return this.name();
     }

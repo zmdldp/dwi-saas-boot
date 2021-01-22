@@ -1,9 +1,9 @@
 package com.dwi.saas.authority;
 
 
+import com.dwi.basic.annotation.security.PreAuth;
 import com.dwi.basic.base.R;
-import com.dwi.basic.log.entity.OptLogDTO;
-import com.dwi.saas.authority.domain.entity.common.OptLog;
+import com.dwi.saas.authority.domain.entity.common.LoginLog;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author dwi
  * @date 2019/07/02
  */
-public interface LogApi {
+public interface LoginLogApi {
 
     /**
      * 保存日志
@@ -22,6 +22,7 @@ public interface LogApi {
      * @return 操作日志
      */
     @PostMapping
-    R<OptLog> save(@RequestBody OptLogDTO log);
+    @PreAuth(enabled=false)
+    R<LoginLog> save(@RequestBody LoginLog loginLog);
 
 }

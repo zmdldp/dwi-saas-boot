@@ -1,10 +1,10 @@
-package com.dwi.saas.tenant.init.domain.entity;
+package com.dwi.saas.tenant.init.base.entity;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.dwi.basic.base.entity.Entity;
-import com.dwi.saas.tenant.init.domain.enumeration.TenantConnectTypeEnum;
+import com.dwi.saas.tenant.init.base.enumeration.TenantConnectTypeEnum;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

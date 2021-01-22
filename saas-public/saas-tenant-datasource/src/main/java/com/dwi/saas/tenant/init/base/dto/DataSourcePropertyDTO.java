@@ -1,6 +1,6 @@
-package com.dwi.saas.tenant.init.domain.dto;
+package com.dwi.saas.tenant.init.base.dto;
 
-import com.dwi.saas.tenant.init.domain.enumeration.TenantConnectTypeEnum;
+import com.dwi.saas.tenant.init.base.enumeration.TenantConnectTypeEnum;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

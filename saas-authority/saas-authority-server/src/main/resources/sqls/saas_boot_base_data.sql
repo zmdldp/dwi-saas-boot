@@ -1,4 +1,4 @@
-INSERT INTO `c_application` VALUES (1, 'saas_web', 'saas_web_secret', 'http://dwi.top:10000/dwi-ui/', 'saas快速开发平台', NULL, 'PC', '内置', b'1', 1, '2020-04-02 15:05:14', 1, '2020-04-02 15:05:17');
+INSERT INTO `c_application` VALUES (1, 'saas_web', 'saas_web_secret', '127.0.0.1:10000', 'saas快速开发平台', NULL, 'PC', '内置', b'1', 1, '2020-04-02 15:05:14', 1, '2020-04-02 15:05:17');
 
 INSERT INTO `c_parameter` VALUES (1, 'LoginPolicy', '登录策略', 'MANY', 'ONLY_ONE:一个用户只能登录一次; MANY:用户可以任意登录; ONLY_ONE_CLIENT:一个用户在一个应用只能登录一次', b'1', b'1', 1, '2020-04-02 21:56:19', 1, '2020-04-03 01:12:32');
 

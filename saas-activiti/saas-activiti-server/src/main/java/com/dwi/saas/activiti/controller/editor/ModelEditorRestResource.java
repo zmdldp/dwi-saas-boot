@@ -1,6 +1,8 @@
 package com.dwi.saas.activiti.controller.editor;
 
 import cn.hutool.json.JSONObject;
+
+import com.dwi.basic.annotation.base.IgnoreResponseBodyAdvice;
 import com.dwi.basic.base.R;
 import com.dwi.saas.activiti.biz.exception.MyActivitiExceptionCode;
 import com.dwi.saas.activiti.biz.exception.MyException;
@@ -30,6 +32,7 @@ import java.nio.charset.StandardCharsets;
 @RestController
 @RequestMapping("service")
 @Slf4j
+@IgnoreResponseBodyAdvice
 @AllArgsConstructor
 public class ModelEditorRestResource implements ModelDataJsonConstants {
     private final MyModelService myModelService;

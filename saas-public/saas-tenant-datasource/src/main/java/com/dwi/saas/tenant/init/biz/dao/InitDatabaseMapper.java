@@ -1,7 +1,7 @@
 package com.dwi.saas.tenant.init.biz.dao;
 
 import com.baomidou.mybatisplus.annotation.InterceptorIgnore;
-import com.dwi.saas.tenant.init.domain.entity.DatasourceConfig;
+import com.dwi.saas.tenant.init.base.entity.DatasourceConfig;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

@@ -1,4 +1,4 @@
-package com.dwi.saas.tenant.init.domain.entity;
+package com.dwi.saas.tenant.init.base.entity;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.annotation.TableField;

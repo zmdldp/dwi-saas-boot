@@ -1,7 +1,7 @@
 package com.dwi.saas.tenant.init.biz.service;
 
 import com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DataSourceProperty;
-import com.dwi.saas.tenant.init.domain.dto.DataSourcePropertyDTO;
+import com.dwi.saas.tenant.init.base.dto.DataSourcePropertyDTO;
 
 import java.util.Set;
 

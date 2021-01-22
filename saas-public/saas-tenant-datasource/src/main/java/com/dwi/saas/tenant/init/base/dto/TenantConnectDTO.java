@@ -1,4 +1,4 @@
-package com.dwi.saas.tenant.init.domain.dto;
+package com.dwi.saas.tenant.init.base.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import com.dwi.saas.tenant.init.domain.enumeration.TenantConnectTypeEnum;
+import com.dwi.saas.tenant.init.base.enumeration.TenantConnectTypeEnum;
 
 /**
  * 租户连接

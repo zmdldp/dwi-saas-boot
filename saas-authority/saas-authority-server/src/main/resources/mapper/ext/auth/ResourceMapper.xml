@@ -14,7 +14,7 @@
         )
     </select>
 
-    <insert id="saveOrUpdateUnique" parameterType="com.dwi.saas.authority.entity.auth.Resource">
+    <insert id="saveOrUpdateUnique" parameterType="com.dwi.saas.authority.domain.entity.auth.Resource">
     insert into c_resource ( id, created_by, create_time, updated_by, update_time,
         code, name, menu_id, describe_)
     values (#{id,jdbcType=BIGINT}, #{createUser,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP},#{updateUser,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP},

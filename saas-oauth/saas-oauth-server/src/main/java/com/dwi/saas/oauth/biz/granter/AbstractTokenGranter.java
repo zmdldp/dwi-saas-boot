@@ -45,7 +45,8 @@ import com.dwi.saas.oauth.domain.LoginParamDTO;
 import com.dwi.saas.oauth.domain.Online;
 import com.dwi.saas.tenant.TenantApi;
 import com.dwi.saas.tenant.domain.entity.Tenant;
-import com.dwi.saas.tenant.init.domain.enumeration.TenantStatusEnum;
+//import com.dwi.saas.tenant.init.base.enumeration.TenantStatusEnum;
+import com.dwi.saas.tenant.domain.enumeration.TenantStatusEnum;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.StrUtil;

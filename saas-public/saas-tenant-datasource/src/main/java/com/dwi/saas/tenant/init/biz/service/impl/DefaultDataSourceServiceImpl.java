@@ -3,8 +3,8 @@ package com.dwi.saas.tenant.init.biz.service.impl;
 import com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DataSourceProperty;
 import com.dwi.basic.database.properties.DatabaseProperties;
 import com.dwi.basic.exception.BizException;
+import com.dwi.saas.tenant.init.base.dto.DataSourcePropertyDTO;
 import com.dwi.saas.tenant.init.biz.service.DataSourceService;
-import com.dwi.saas.tenant.init.domain.dto.DataSourcePropertyDTO;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

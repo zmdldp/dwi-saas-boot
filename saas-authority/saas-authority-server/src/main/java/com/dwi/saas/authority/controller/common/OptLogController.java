@@ -11,7 +11,7 @@ import com.dwi.basic.base.controller.SuperSimpleController;
 import com.dwi.basic.base.request.PageParams;
 import com.dwi.basic.log.entity.OptLogDTO;
 import com.dwi.basic.utils.BeanPlusUtil;
-import com.dwi.saas.authority.LogApi;
+import com.dwi.saas.authority.OptLogApi;
 import com.dwi.saas.authority.biz.service.common.OptLogService;
 import com.dwi.saas.authority.domain.dto.common.OptLogResult;
 import com.dwi.saas.authority.domain.entity.common.OptLog;
@@ -53,7 +53,7 @@ import static com.dwi.saas.common.constant.SwaggerConstants.PARAM_TYPE_QUERY;
 @PreAuth(replace = "authority:optLog:")
 public class OptLogController extends SuperSimpleController<OptLogService, OptLog>
         implements DeleteController<OptLog, Long>, PoiController<OptLog, OptLog>,
-        LogApi {
+        OptLogApi {
 
     @ApiOperation(value = "分页列表查询")
     @PostMapping(value = "/page")

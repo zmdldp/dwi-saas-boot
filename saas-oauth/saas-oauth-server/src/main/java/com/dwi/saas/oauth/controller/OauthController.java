@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dwi.basic.annotation.base.IgnoreResponseBodyAdvice;
 import com.dwi.basic.base.R;
 import com.dwi.basic.exception.BizException;
 import com.dwi.basic.jwt.TokenUtil;
@@ -75,6 +76,7 @@ public class OauthController {
 
     @ApiOperation(value = "验证码", notes = "验证码")
     @GetMapping(value = "/anno/captcha", produces = "image/png")
+    @IgnoreResponseBodyAdvice
     public void captcha(@RequestParam(value = "key") String key, HttpServletResponse response) throws IOException {
         this.validateCodeService.create(key, response);
     }

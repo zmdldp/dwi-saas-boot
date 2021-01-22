@@ -1,6 +1,13 @@
 package com.dwi.saas.authority.controller.common;
 
-import cn.hutool.core.util.ArrayUtil;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.dwi.basic.base.R;
 import com.dwi.basic.database.mybatis.auth.DataScopeType;
 import com.dwi.basic.utils.CollHelper;
@@ -12,22 +19,23 @@ import com.dwi.saas.authority.domain.enumeration.auth.AuthorizeType;
 import com.dwi.saas.authority.domain.enumeration.auth.Sex;
 import com.dwi.saas.authority.domain.enumeration.common.LogType;
 import com.dwi.saas.common.enums.HttpMethod;
-import com.dwi.saas.tenant.init.domain.enumeration.TenantStatusEnum;
+import com.dwi.saas.file.domain.enumeration.DataType;
+import com.dwi.saas.msg.domain.enumeration.MsgBizType;
+import com.dwi.saas.msg.domain.enumeration.MsgType;
+import com.dwi.saas.sms.domain.enumeration.ProviderType;
+import com.dwi.saas.sms.domain.enumeration.SendStatus;
+import com.dwi.saas.sms.domain.enumeration.SourceType;
+import com.dwi.saas.sms.domain.enumeration.TaskStatus;
+import com.dwi.saas.tenant.domain.enumeration.TenantTypeEnum;
+import com.dwi.saas.tenant.init.base.enumeration.TenantStatusEnum;
 
+import cn.hutool.core.util.ArrayUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
- * move from Oauth
  * 通用 控制器
  *
  * @author dwi
@@ -50,19 +58,18 @@ public class GeneralController {
         ENUM_MAP.put(LogType.class.getSimpleName(), CollHelper.getMap(LogType.values()));
         ENUM_MAP.put(AuthorizeType.class.getSimpleName(), CollHelper.getMap(AuthorizeType.values()));
         ENUM_MAP.put(Sex.class.getSimpleName(), CollHelper.getMap(Sex.values()));
+        ENUM_MAP.put(TenantTypeEnum.class.getSimpleName(), CollHelper.getMap(TenantTypeEnum.values()));
         ENUM_MAP.put(TenantStatusEnum.class.getSimpleName(), CollHelper.getMap(TenantStatusEnum.values()));
         ENUM_MAP.put(ApplicationAppTypeEnum.class.getSimpleName(), CollHelper.getMap(ApplicationAppTypeEnum.values()));
-        //TODO 暂时注释掉, 待优化
-//        ENUM_MAP.put(TenantTypeEnum.class.getSimpleName(), CollHelper.getMap(TenantTypeEnum.values()));
-//        // 文件服务
-//        ENUM_MAP.put(DataType.class.getSimpleName(), CollHelper.getMap(HttpMethod.values()));
-//        //消息服务
-//        ENUM_MAP.put(MsgType.class.getSimpleName(), CollHelper.getMap(MsgType.values()));
-//        ENUM_MAP.put(MsgBizType.class.getSimpleName(), CollHelper.getMap(MsgBizType.values()));
-//        ENUM_MAP.put(ProviderType.class.getSimpleName(), CollHelper.getMap(ProviderType.values()));
-//        ENUM_MAP.put(SourceType.class.getSimpleName(), CollHelper.getMap(SourceType.values()));
-//        ENUM_MAP.put(SendStatus.class.getSimpleName(), CollHelper.getMap(SendStatus.values()));
-//        ENUM_MAP.put(TaskStatus.class.getSimpleName(), CollHelper.getMap(TaskStatus.values()));
+        // 文件服务
+        ENUM_MAP.put(DataType.class.getSimpleName(), CollHelper.getMap(HttpMethod.values()));
+        //消息服务
+        ENUM_MAP.put(MsgType.class.getSimpleName(), CollHelper.getMap(MsgType.values()));
+        ENUM_MAP.put(MsgBizType.class.getSimpleName(), CollHelper.getMap(MsgBizType.values()));
+        ENUM_MAP.put(ProviderType.class.getSimpleName(), CollHelper.getMap(ProviderType.values()));
+        ENUM_MAP.put(SourceType.class.getSimpleName(), CollHelper.getMap(SourceType.values()));
+        ENUM_MAP.put(SendStatus.class.getSimpleName(), CollHelper.getMap(SendStatus.values()));
+        ENUM_MAP.put(TaskStatus.class.getSimpleName(), CollHelper.getMap(TaskStatus.values()));
     }
 
     @ApiOperation(value = "获取当前系统指定枚举", notes = "获取当前系统指定枚举")

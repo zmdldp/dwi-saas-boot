@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dwi.basic.annotation.base.IgnoreResponseBodyAdvice;
 import com.dwi.saas.authority.InjectionApi;
 import com.dwi.saas.authority.biz.service.auth.UserService;
 import com.dwi.saas.authority.biz.service.common.DictionaryService;
@@ -27,6 +28,7 @@ import java.util.Set;
 @Slf4j
 @RestController
 @AllArgsConstructor
+@IgnoreResponseBodyAdvice
 @Api(value = "数据注入查询接口", tags = "数据注入查询接口， 不建议前端调用")
 public class InjectionController implements InjectionApi{
     private final DictionaryService dictionaryService;

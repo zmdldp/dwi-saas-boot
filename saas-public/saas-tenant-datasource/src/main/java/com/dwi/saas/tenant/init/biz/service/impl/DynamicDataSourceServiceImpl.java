@@ -12,10 +12,10 @@ import com.baomidou.dynamic.datasource.spring.boot.autoconfigure.druid.DruidConf
 import com.dwi.basic.database.properties.DatabaseProperties;
 import com.dwi.basic.exception.BizException;
 import com.dwi.basic.utils.StrPool;
+import com.dwi.saas.tenant.init.base.dto.DataSourcePropertyDTO;
+import com.dwi.saas.tenant.init.base.enumeration.TenantConnectTypeEnum;
 import com.dwi.saas.tenant.init.biz.dao.InitDatabaseMapper;
 import com.dwi.saas.tenant.init.biz.service.DataSourceService;
-import com.dwi.saas.tenant.init.domain.dto.DataSourcePropertyDTO;
-import com.dwi.saas.tenant.init.domain.enumeration.TenantConnectTypeEnum;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

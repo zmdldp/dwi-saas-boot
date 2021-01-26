@@ -29,6 +29,10 @@
             <groupId>cn.afterturn</groupId>
             <artifactId>easypoi-spring-boot-starter</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.dwi.basic</groupId>
+            <artifactId>saas-security-starter</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

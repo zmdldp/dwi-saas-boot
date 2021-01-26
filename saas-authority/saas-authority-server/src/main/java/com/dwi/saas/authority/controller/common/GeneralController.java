@@ -19,15 +19,15 @@ import com.dwi.saas.authority.domain.enumeration.auth.AuthorizeType;
 import com.dwi.saas.authority.domain.enumeration.auth.Sex;
 import com.dwi.saas.authority.domain.enumeration.common.LogType;
 import com.dwi.saas.common.enums.HttpMethod;
-import com.dwi.saas.file.domain.enumeration.DataType;
-import com.dwi.saas.msg.domain.enumeration.MsgBizType;
-import com.dwi.saas.msg.domain.enumeration.MsgType;
-import com.dwi.saas.sms.domain.enumeration.ProviderType;
-import com.dwi.saas.sms.domain.enumeration.SendStatus;
-import com.dwi.saas.sms.domain.enumeration.SourceType;
-import com.dwi.saas.sms.domain.enumeration.TaskStatus;
-import com.dwi.saas.tenant.domain.enumeration.TenantTypeEnum;
-import com.dwi.saas.tenant.init.base.enumeration.TenantStatusEnum;
+//import com.dwi.saas.file.domain.enumeration.DataType;
+//import com.dwi.saas.msg.domain.enumeration.MsgBizType;
+//import com.dwi.saas.msg.domain.enumeration.MsgType;
+//import com.dwi.saas.sms.domain.enumeration.ProviderType;
+//import com.dwi.saas.sms.domain.enumeration.SendStatus;
+//import com.dwi.saas.sms.domain.enumeration.SourceType;
+//import com.dwi.saas.sms.domain.enumeration.TaskStatus;
+//import com.dwi.saas.tenant.domain.enumeration.TenantTypeEnum;
+//import com.dwi.saas.tenant.init.base.enumeration.TenantStatusEnum;
 
 import cn.hutool.core.util.ArrayUtil;
 import io.swagger.annotations.Api;
@@ -58,18 +58,18 @@ public class GeneralController {
         ENUM_MAP.put(LogType.class.getSimpleName(), CollHelper.getMap(LogType.values()));
         ENUM_MAP.put(AuthorizeType.class.getSimpleName(), CollHelper.getMap(AuthorizeType.values()));
         ENUM_MAP.put(Sex.class.getSimpleName(), CollHelper.getMap(Sex.values()));
-        ENUM_MAP.put(TenantTypeEnum.class.getSimpleName(), CollHelper.getMap(TenantTypeEnum.values()));
-        ENUM_MAP.put(TenantStatusEnum.class.getSimpleName(), CollHelper.getMap(TenantStatusEnum.values()));
-        ENUM_MAP.put(ApplicationAppTypeEnum.class.getSimpleName(), CollHelper.getMap(ApplicationAppTypeEnum.values()));
-        // 文件服务
-        ENUM_MAP.put(DataType.class.getSimpleName(), CollHelper.getMap(HttpMethod.values()));
-        //消息服务
-        ENUM_MAP.put(MsgType.class.getSimpleName(), CollHelper.getMap(MsgType.values()));
-        ENUM_MAP.put(MsgBizType.class.getSimpleName(), CollHelper.getMap(MsgBizType.values()));
-        ENUM_MAP.put(ProviderType.class.getSimpleName(), CollHelper.getMap(ProviderType.values()));
-        ENUM_MAP.put(SourceType.class.getSimpleName(), CollHelper.getMap(SourceType.values()));
-        ENUM_MAP.put(SendStatus.class.getSimpleName(), CollHelper.getMap(SendStatus.values()));
-        ENUM_MAP.put(TaskStatus.class.getSimpleName(), CollHelper.getMap(TaskStatus.values()));
+//        ENUM_MAP.put(TenantTypeEnum.class.getSimpleName(), CollHelper.getMap(TenantTypeEnum.values()));
+//        ENUM_MAP.put(TenantStatusEnum.class.getSimpleName(), CollHelper.getMap(TenantStatusEnum.values()));
+//        ENUM_MAP.put(ApplicationAppTypeEnum.class.getSimpleName(), CollHelper.getMap(ApplicationAppTypeEnum.values()));
+//        // 文件服务
+//        ENUM_MAP.put(DataType.class.getSimpleName(), CollHelper.getMap(HttpMethod.values()));
+//        //消息服务
+//        ENUM_MAP.put(MsgType.class.getSimpleName(), CollHelper.getMap(MsgType.values()));
+//        ENUM_MAP.put(MsgBizType.class.getSimpleName(), CollHelper.getMap(MsgBizType.values()));
+//        ENUM_MAP.put(ProviderType.class.getSimpleName(), CollHelper.getMap(ProviderType.values()));
+//        ENUM_MAP.put(SourceType.class.getSimpleName(), CollHelper.getMap(SourceType.values()));
+//        ENUM_MAP.put(SendStatus.class.getSimpleName(), CollHelper.getMap(SendStatus.values()));
+//        ENUM_MAP.put(TaskStatus.class.getSimpleName(), CollHelper.getMap(TaskStatus.values()));
     }
 
     @ApiOperation(value = "获取当前系统指定枚举", notes = "获取当前系统指定枚举")

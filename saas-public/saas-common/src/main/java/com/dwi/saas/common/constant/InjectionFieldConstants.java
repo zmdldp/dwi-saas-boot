@@ -19,7 +19,8 @@ public class InjectionFieldConstants {
      * 如： @FeignClient(name = "${saas.feign.authority-server:saas-authority-server}", path = "dictionaryItem",
      * qualifier = "dictionaryItemApi", fallback = DictionaryItemApiFallback.class)
      */
-    public static final String DICTIONARY_ITEM_FEIGN_CLASS = "dictionaryApi";
+    //public static final String DICTIONARY_ITEM_FEIGN_CLASS = "dictionaryApi";
+    public static final String AUTHORITY_INJECTION_FEIGN_CLASS = "authorityInjectionApi";
     /**
      * 数据字典项 service查询类
      */
@@ -37,7 +38,7 @@ public class InjectionFieldConstants {
     /**
      * 组织 feign查询类
      */
-    public static final String ORG_ID_FEIGN_CLASS = "orgApi";
+    //public static final String ORG_ID_FEIGN_CLASS = "orgApi";
 
     /**
      * 组织 查询方法
@@ -53,7 +54,7 @@ public class InjectionFieldConstants {
     /**
      * 用户 feign查询类
      */
-    public static final String USER_ID_FEIGN_CLASS = "userApi";
+    //public static final String USER_ID_FEIGN_CLASS = "userApi";
 
     /**
      * 用户 查询方法
@@ -69,7 +70,7 @@ public class InjectionFieldConstants {
     /**
      * 组织 feign查询类
      */
-    public static final String STATION_ID_FEIGN_CLASS = "stationApi";
+    //public static final String STATION_ID_FEIGN_CLASS = "stationApi";
 
     /**
      * 组织 查询方法

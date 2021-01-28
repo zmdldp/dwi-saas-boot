@@ -1,7 +1,7 @@
 # saas-boot 简介
-`saas-boot` 基于`SpringBoot(2.3.6.RELEASE)` 的前后分离的快速开发平台，其中的可配置的SaaS功能尤其闪耀，
+`saas-boot` 基于`SpringBoot(2.3.6.RELEASE)` 的前后分离的快速开发平台。
 具备RBAC功能、网关统一鉴权、Xss防跨站攻击、自动代码生成、多种存储系统、分布式事务、分布式定时任务等多个模块，支持多业务系统并行开发，
-支持多服务并行开发，可以作为后端服务的开发脚手架。代码简洁，注释齐全，架构清晰，非常适合学习和企业作为基础框架使用。
+支持多服务并行开发，可以作为后端服务的开发脚手架。
 
 核心技术采用SpringBoot、Mybatis、Redis、RabbitMQ、FastDFS/MinIO、SkyWalking等主要框架和中间件。
 希望能努力打造一套从 `JavaWeb基础框架` - `单体架构` - `持续集成` - `系统监测` 的解决方案。`本项目旨在实现基础能力，不涉及具体业务。`
@@ -16,15 +16,12 @@
 | SCHEMA(独立schema) | 每个租户独立一个 数据库(schema)，执行sql时，动态在表名前增加schema | 简单、开发无感知、数据隔离性好 | 配置文件中必须配置数据库的root账号、不支持复杂sql和 sql嵌套自定义函数 | 
 | DATASOURCE(独立数据源) | 每个租户独立一个 数据库(数据源)，执行代码时，动态切换数据源 | 可独立部署数据库，数据隔离性好、扩展性高、故障影响小 | 相对复杂、开发需要注意切换数据源时的事务问题、需要较多的数据库 |
 
-## saas 会员版项目演示地址
-- 地址： http://dwi.top:10000/saas-web/
+## saas 演示
 - 以下内置账号仅限于内置的0000租户 
-- 平台管理员： saas_pt/saas (内置给公司内部运营人员使用)
-- 超级管理员： saas/saas    
-- 普通管理员： general/saas
-- 普通账号： normal/saas
-
-> ps: 演示环境中内置租户没有写入权限，若要在演示环境测试增删改，请使用saas_pt账号查询租户管理员账号后,登录新租户测试
+- 平台管理员： saas_pt/dwi123 (内置给公司内部运营人员使用)
+- 超级管理员： saas/dwi123    
+- 普通管理员： general/dwi123
+- 普通账号： normal/dwi123
 
 ## saas-cloud/saas-boot + saas-web 功能介绍：
 1. 租户管理：运营人员管理所有的租户创建
@@ -111,7 +108,6 @@
     - 前端：vue + element-ui
     - 持久层框架： Mybatis-plus
     - 代码生成器：基于Mybatis-plus-generator自定义 
-    - API网关：Gateway/zuul
     - 项目构建：Maven 
     - 监控： spring-boot-admin  
     - 文件服务器：FastDFS 5.0.5/阿里云OSS/本地存储/MinIO

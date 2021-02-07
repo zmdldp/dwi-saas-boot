@@ -129,7 +129,12 @@ saas:
       activiti:
         title: 流程组件模块
         base-package: com.dwi.saas.activiti.controller
-
+  captcha:
+    type: ARITHMETIC
+    width: 158
+    height: 58
+    len: 2
+    charType: 2
 
 knife4j:
   enable: true

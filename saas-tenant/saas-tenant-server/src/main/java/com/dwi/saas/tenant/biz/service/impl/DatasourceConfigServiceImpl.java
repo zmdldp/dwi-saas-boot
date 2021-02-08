@@ -6,7 +6,7 @@ import com.dwi.basic.base.service.SuperServiceImpl;
 import com.dwi.saas.tenant.biz.dao.DatasourceConfigMapper;
 import com.dwi.saas.tenant.biz.service.DatasourceConfigService;
 import com.dwi.saas.tenant.domain.entity.DatasourceConfig;
-import com.dwi.saas.tenant.init.biz.service.DataSourceService;
+//import com.dwi.saas.tenant.init.biz.service.DataSourceService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,11 +29,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DatasourceConfigServiceImpl extends SuperServiceImpl<DatasourceConfigMapper, DatasourceConfig> implements DatasourceConfigService {
 
-    private final DataSourceService dataSourceService;
+    //private final DataSourceService dataSourceService;
 
     @Override
     public Boolean testConnection(DataSourceProperty dataSourceProperty) {
-        return dataSourceService.testConnection(dataSourceProperty);
+    	return true;
+        //return dataSourceService.testConnection(dataSourceProperty);
     }
 
 }

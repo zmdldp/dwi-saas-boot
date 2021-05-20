@@ -7,7 +7,7 @@
     <artifactId>dwi-saas-boot</artifactId>
     <version>1.0.0-Boot-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <url>https://gitee.com/dwi111/saas-boot</url>
+    <url>https://github.com/zmdldp/dwi-saas-boot</url>
     <name>${project.artifactId}</name>
     <description>saas-boot</description>
     <developers>
@@ -33,7 +33,7 @@
         <saas-util.version>1.0.0-Common-SNAPSHOT</saas-util.version>
         <saas-project.version>1.0.0-Boot-SNAPSHOT</saas-project.version>
         <seata.version>1.3.0</seata.version>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 

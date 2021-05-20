@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>saas-authority</artifactId>
+        <groupId>com.dwi.saas</groupId>
+        <version>1.0.0-Boot-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>saas-authority-server</artifactId>
+    <name>${project.artifactId}</name>
+    <description>用户资源服务模块</description>
+
+    <dependencies>   
+       <dependency>
+            <groupId>com.dwi.saas</groupId>
+            <artifactId>saas-authority-api</artifactId>
+            <version>${saas-project.version}</version>
+        </dependency>
+        
+         <dependency>
+            <groupId>com.dwi.saas</groupId>
+            <artifactId>saas-common</artifactId>
+            <version>${saas-project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.dwi.basic</groupId>
+            <artifactId>saas-boot</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dwi.basic</groupId>
+            <artifactId>saas-databases</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.dwi.basic</groupId>
+            <artifactId>saas-cache-starter</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.dwi.basic</groupId>
+            <artifactId>saas-echo-starter</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.dwi.basic</groupId>
+            <artifactId>saas-log-starter</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.dwi.basic</groupId>
+            <artifactId>saas-dozer-starter</artifactId>
+        </dependency>
+
+        <!-- @RefreshScope 需要使用 -->
+        <!-- <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-context</artifactId>
+        </dependency> -->
+        
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+            <scope>compile</scope>
+        </dependency>
+
+    </dependencies>
+    
+</project>

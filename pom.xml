@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.dwi.saas</groupId>
+    <artifactId>dwi-saas-boot</artifactId>
+    <version>1.0.0-Boot-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <url>https://gitee.com/dwi111/saas-boot</url>
+    <name>${project.artifactId}</name>
+    <description>saas-boot</description>
+    <developers>
+        <developer>
+            <name>dwi</name>
+            <email>zmdldp@gmail.com</email>
+        </developer>
+    </developers>
+
+    <modules>
+        <module>saas-public/saas-common</module>
+        <module>saas-oauth</module>
+        <module>saas-authority</module>
+        <module>saas-tenant</module>
+        <module>saas-msg</module>
+        <module>saas-file</module>
+        <module>saas-gateway</module>
+        <module>saas-activiti</module>
+        <module>saas-business-modules</module>
+    </modules>
+
+    <properties>
+        <saas-util.version>1.0.0-Common-SNAPSHOT</saas-util.version>
+        <saas-project.version>1.0.0-Boot-SNAPSHOT</saas-project.version>
+        <seata.version>1.3.0</seata.version>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <docker.image.prefix>dwi</docker.image.prefix>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
+        <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
+        <dockerfile-maven-plugin.version>1.4.12</dockerfile-maven-plugin.version>
+        <spring-boot-maven-plugin.version>2.3.6.RELEASE</spring-boot-maven-plugin.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>com.dwi.basic</groupId>
+                <artifactId>saas-dependencies</artifactId>
+                <version>${saas-util.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.dwi.basic</groupId>
+                <artifactId>saas-annotation</artifactId>
+                <version>${saas-util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dwi.basic</groupId>
+                <artifactId>saas-boot</artifactId>
+                <version>${saas-util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dwi.basic</groupId>
+                <artifactId>saas-cache-starter</artifactId>
+                <version>${saas-util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dwi.basic</groupId>
+                <artifactId>saas-security-starter</artifactId>
+                <version>${saas-util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dwi.basic</groupId>
+                <artifactId>saas-core</artifactId>
+                <version>${saas-util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dwi.basic</groupId>
+                <artifactId>saas-databases</artifactId>
+                <version>${saas-util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dwi.basic</groupId>
+                <artifactId>saas-dozer-starter</artifactId>
+                <version>${saas-util.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.dwi.basic</groupId>
+                <artifactId>saas-echo-starter</artifactId>
+                <version>${saas-util.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.dwi.basic</groupId>
+                <artifactId>saas-jwt-starter</artifactId>
+                <version>${saas-util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dwi.basic</groupId>
+                <artifactId>saas-log-starter</artifactId>
+                <version>${saas-util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dwi.basic</groupId>
+                <artifactId>saas-mq-starter</artifactId>
+                <version>${saas-util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dwi.basic</groupId>
+                <artifactId>saas-msg-starter</artifactId>
+                <version>${saas-util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dwi.basic</groupId>
+                <artifactId>saas-datasource-plugin</artifactId>
+                <version>${saas-util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dwi.basic</groupId>
+                <artifactId>saas-swagger2-starter</artifactId>
+                <version>${saas-util.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.dwi.basic</groupId>
+                <artifactId>saas-validator-starter</artifactId>
+                <version>${saas-util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dwi.basic</groupId>
+                <artifactId>saas-xss-starter</artifactId>
+                <version>${saas-util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dwi.basic</groupId>
+                <artifactId>saas-zipkin-client-starter</artifactId>
+                <version>${saas-util.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!--Lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                    </configuration>
+                </plugin>
+                <!-- resources资源插件 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven-resources-plugin.version}</version>
+                    <configuration>
+                        <delimiters>
+                            <delimiter>@</delimiter>
+                        </delimiters>
+                        <useDefaultDelimiters>false</useDefaultDelimiters>
+                        <encoding>UTF-8</encoding>
+                        <!-- 后缀为pem、pfx的证书文件 -->
+                        <nonFilteredFileExtensions>
+                            <nonFilteredFileExtension>pem</nonFilteredFileExtension>
+                            <nonFilteredFileExtension>pfx</nonFilteredFileExtension>
+                            <nonFilteredFileExtension>p12</nonFilteredFileExtension>
+                            <nonFilteredFileExtension>key</nonFilteredFileExtension>
+                            <nonFilteredFileExtension>db</nonFilteredFileExtension>
+                            <nonFilteredFileExtension>eot</nonFilteredFileExtension>
+                            <nonFilteredFileExtension>otf</nonFilteredFileExtension>
+                            <nonFilteredFileExtension>svg</nonFilteredFileExtension>
+                            <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+                            <nonFilteredFileExtension>woff</nonFilteredFileExtension>
+                            <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+                        </nonFilteredFileExtensions>
+                    </configuration>
+                </plugin>
+                <!-- java文档插件 -->
+                <!--                <plugin>-->
+                <!--                    <groupId>org.apache.maven.plugins</groupId>-->
+                <!--                    <artifactId>maven-javadoc-plugin</artifactId>-->
+                <!--                    <version>${maven-javadoc-plugin.version}</version>-->
+                <!--                </plugin>-->
+
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot-maven-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

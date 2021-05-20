@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>saas-oauth</artifactId>
+        <groupId>com.dwi.saas</groupId>
+        <version>1.0.0-Boot-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>saas-oauth-server</artifactId>
+    <name>${project.artifactId}</name>
+    <description>认证服务模块</description>
+    <dependencies>        
+       <dependency>
+            <groupId>com.dwi.saas</groupId>
+            <artifactId>saas-tenant-api</artifactId>
+            <version>${saas-project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.dwi.saas</groupId>
+            <artifactId>saas-authority-api</artifactId>
+            <version>${saas-project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.dwi.basic</groupId>
+            <artifactId>saas-datasource-plugin</artifactId>
+        </dependency> 
+        
+        <dependency>
+            <groupId>com.dwi.basic</groupId>
+            <artifactId>saas-cache-starter</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.dwi.basic</groupId>
+            <artifactId>saas-dozer-starter</artifactId>
+        </dependency>
+               
+        <!-- jwt 只有认证服务需要使用 -->
+        <dependency>
+            <groupId>com.dwi.basic</groupId>
+            <artifactId>saas-jwt-starter</artifactId>
+        </dependency>
+ 
+        <dependency>
+            <groupId>com.dwi.basic</groupId>
+            <artifactId>saas-log-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.whvcse</groupId>
+            <artifactId>easy-captcha</artifactId>
+        </dependency>
+        
+         <!-- 优化移除cloud相关依赖 -->
+         <dependency>
+            <groupId>com.dwi.basic</groupId>
+            <artifactId>saas-security-starter</artifactId>
+        </dependency>
+        
+        
+
+    </dependencies>
+
+
+</project>

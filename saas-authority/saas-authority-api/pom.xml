@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.dwi.saas</groupId>
+        <artifactId>saas-authority</artifactId>
+        <version>1.0.0-Boot-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>saas-authority-api</artifactId>
+
+    <name>${project.artifactId}</name>
+    <description>用户资源api模块</description>
+    <dependencies>
+        
+        <dependency>
+            <groupId>com.dwi.basic</groupId>
+            <artifactId>saas-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dwi.saas</groupId>
+            <artifactId>saas-common</artifactId>
+            <version>${saas-project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dwi.basic</groupId>
+            <artifactId>saas-security-starter</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

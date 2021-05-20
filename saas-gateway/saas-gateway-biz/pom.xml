@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>saas-gateway</artifactId>
+        <groupId>com.dwi.saas</groupId>
+        <version>1.0.0-Boot-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>saas-gateway-biz</artifactId>
+    <name>${project.artifactId}</name>
+    <description>网关服务插件</description>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>com.dwi.saas</groupId>
+            <artifactId>saas-common</artifactId>
+            <version>${saas-project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.dwi.basic</groupId>
+            <artifactId>saas-boot</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dwi.basic</groupId>
+            <artifactId>saas-databases</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dwi.basic</groupId>
+            <artifactId>saas-datasource-plugin</artifactId>
+        </dependency> 
+        <dependency>
+            <groupId>com.dwi.basic</groupId>
+            <artifactId>saas-jwt-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dwi.basic</groupId>
+            <artifactId>saas-cache-starter</artifactId>
+        </dependency>
+    </dependencies>
+</project>

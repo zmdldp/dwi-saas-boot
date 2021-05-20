@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>saas-tenant</artifactId>
+        <groupId>com.dwi.saas</groupId>
+        <version>1.0.0-Boot-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>saas-tenant-server</artifactId>
+    <name>${project.artifactId}</name>
+    <description>租户服务模块</description>
+    <dependencies>
+        
+        <dependency>
+            <groupId>com.dwi.saas</groupId>
+            <artifactId>saas-tenant-api</artifactId>
+            <version>${saas-project.version}</version>
+        </dependency>
+       
+        <dependency>
+            <groupId>com.dwi.saas</groupId>
+            <artifactId>saas-common</artifactId>
+            <version>${saas-project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.dwi.basic</groupId>
+            <artifactId>saas-datasource-plugin</artifactId>
+        </dependency> 
+        
+        <dependency>
+            <groupId>com.dwi.basic</groupId>
+            <artifactId>saas-security-starter</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.dwi.basic</groupId>
+            <artifactId>saas-cache-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.dwi.basic</groupId>
+            <artifactId>saas-mq-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.dwi.basic</groupId>
+            <artifactId>saas-boot</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+        </dependency>
+
+        <!-- @RefreshScope 需要使用 -->
+        <!-- <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-context</artifactId>
+        </dependency> -->
+
+
+    </dependencies>
+
+</project>

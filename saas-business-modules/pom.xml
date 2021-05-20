@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.dwi.saas</groupId>
+        <artifactId>dwi-saas-boot</artifactId>
+        <version>1.0.0-Boot-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>saas-business-modules</artifactId>
+    <name>${project.artifactId}</name>
+    <description>业务服务</description>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>saas-demo</module>
+        <module>saas-example</module>
+    </modules>
+
+</project>

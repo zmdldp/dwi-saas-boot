@@ -5,7 +5,7 @@ import com.dwi.basic.annotation.log.SysLog;
 import com.dwi.basic.annotation.security.PreAuth;
 import com.dwi.basic.base.R;
 import com.dwi.basic.base.controller.SuperController;
-import com.dwi.basic.datasource.plugin.biz.service.DatasourceConfigService;
+import com.dwi.basic.datasource.plugin.service.DatasourceConfigService;
 import com.dwi.basic.datasource.plugin.domain.entity.DatasourceConfig;
 import com.dwi.saas.tenant.domain.dto.DatasourceConfigPageQuery;
 import com.dwi.saas.tenant.domain.dto.DatasourceConfigSaveDTO;

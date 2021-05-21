@@ -1,8 +1,8 @@
 package com.dwi.saas.tenant.strategy.impl;
 
 import com.dwi.basic.database.mybatis.conditions.Wraps;
-import com.dwi.basic.datasource.plugin.biz.service.DatasourceConfigService;
-import com.dwi.basic.datasource.plugin.biz.service.TenantDatasourceConfigService;
+import com.dwi.basic.datasource.plugin.service.DatasourceConfigService;
+import com.dwi.basic.datasource.plugin.service.TenantDatasourceConfigService;
 import com.dwi.basic.datasource.plugin.domain.entity.DatasourceConfig;
 import com.dwi.basic.datasource.plugin.domain.entity.TenantDatasourceConfig;
 import com.dwi.saas.tenant.domain.dto.TenantConnectDTO.ConnectConfig;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dwi.saas.file.biz.dao.AttachmentMapper">
+<mapper namespace="com.dwi.saas.file.dao.AttachmentMapper">
 
     <resultMap id="AttachmentResultMap" type="com.dwi.saas.file.domain.dto.AttachmentResultDTO">
         <result column="biz_id" jdbcType="VARCHAR" property="bizId"/>

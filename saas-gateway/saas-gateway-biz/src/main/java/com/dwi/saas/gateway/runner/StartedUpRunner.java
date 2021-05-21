@@ -5,7 +5,7 @@ import com.dwi.basic.database.properties.DatabaseProperties;
 import com.dwi.basic.database.properties.MultiTenantType;
 import com.dwi.saas.gateway.service.BlockListService;
 import com.dwi.saas.gateway.service.RateLimiterService;
-import com.dwi.basic.datasource.plugin.biz.dao.InitDatabaseMapper;
+import com.dwi.basic.datasource.plugin.dao.InitDatabaseMapper;
 import com.dwi.basic.datasource.plugin.domain.enumeration.TenantStatusEnum;
 
 import lombok.RequiredArgsConstructor;

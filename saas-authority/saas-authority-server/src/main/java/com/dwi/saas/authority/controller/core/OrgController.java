@@ -68,7 +68,7 @@ public class OrgController extends SuperCacheController<OrgService, Long, Org, O
     private void fillOrg(Org org) {
         if (org.getParentId() == null || org.getParentId() <= 0) {
             org.setParentId(DEF_PARENT_ID);
-            org.setTreePath(DEF_ROOT_PATH);
+            org.setTreePath(EMPTY);
         } else {
             Org parent = this.baseService.getByIdCache(org.getParentId());
             BizAssert.notNull(parent, "父组织不能为空");

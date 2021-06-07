@@ -29,6 +29,7 @@ saas:
     multiTenantType: DATASOURCE # NONE,COLUMN,SCHEMA,DATASOURCE
     isNotWrite: false
     isBlockAttack: false  # 是否启用 攻击 SQL 阻断解析器
+    p6spy: true # 生产环境请设置p6spy = false
     isSeata: false
     id-type: HU_TOOL
     hutoolId:

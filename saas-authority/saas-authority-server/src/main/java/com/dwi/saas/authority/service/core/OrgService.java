@@ -4,10 +4,7 @@ import com.dwi.basic.base.service.SuperCacheService;
 import com.dwi.basic.model.LoadService;
 import com.dwi.saas.authority.domain.entity.core.Org;
 
-import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * <p>
@@ -16,7 +13,7 @@ import java.util.Set;
  * </p>
  *
  * @author dwi
- * @date 2020-07-22
+ * @date 2019-07-22
  */
 public interface OrgService extends SuperCacheService<Org>, LoadService {
     /**
@@ -35,4 +32,12 @@ public interface OrgService extends SuperCacheService<Org>, LoadService {
      */
     boolean remove(List<Long> ids);
 
+    /**
+     * 检测名称是否存在
+     *
+     * @param id   id
+     * @param name name
+     * @return boolean
+     */
+    boolean check(Long id, String name);
 }
